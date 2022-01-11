@@ -39,11 +39,13 @@ func (r Registration) Resources() []sdk.Resource {
 			AppServiceSourceControlResource{},
 			AppServiceSourceControlTokenResource{},
 			LinuxFunctionAppResource{},
+			LinuxFunctionAppSlotResource{},
 			LinuxWebAppResource{},
 			LinuxWebAppSlotResource{},
 			ServicePlanResource{},
 			WindowsWebAppResource{},
 			WindowsFunctionAppResource{},
+			WindowsFunctionAppSlotResource{},
 		}
 	}
 	return []sdk.Resource{}
