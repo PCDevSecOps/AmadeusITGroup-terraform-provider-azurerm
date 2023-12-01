@@ -787,6 +787,7 @@ func expandEncryption(d *pluginsdk.ResourceData) *vaults.VaultPropertiesEncrypti
 	}
 	if v, ok := encryptionMap["user_assigned_identity_id"].(string); ok && v != "" {
 		encryption.KekIdentity.UserAssignedIdentity = utils.String(v)
+		encryption.KekIdentity.UseSystemAssignedIdentity = utils.Bool(false)
 	}
 	return encryption
 }
@@ -809,6 +810,7 @@ func flattenVaultEncryption(model vaults.Vault) interface{} {
 	encryptionMap["infrastructure_encryption_enabled"] = *encryption.InfrastructureEncryption == vaults.InfrastructureEncryptionStateEnabled
 	if encryption.KekIdentity.UserAssignedIdentity != nil {
 		encryptionMap["user_assigned_identity_id"] = *encryption.KekIdentity.UserAssignedIdentity
+		encryptionMap["use_system_assigned_identity"] = false
 	}
 	return encryptionMap
 }
