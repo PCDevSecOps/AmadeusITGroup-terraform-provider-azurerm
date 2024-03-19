@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-tmresources"
   location = var.location
+  tags = {
+    yor_trace = "8ea69b2d-e6c8-4509-91c4-892b47b0b61a"
+  }
 }
 
 resource "azurerm_traffic_manager_profile" "example" {
@@ -24,6 +27,9 @@ resource "azurerm_traffic_manager_profile" "example" {
     protocol = "HTTP"
     port     = 80
     path     = "/"
+  }
+  tags = {
+    yor_trace = "4992289c-089b-4c95-91e2-91ae708e1165"
   }
 }
 

@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-cdn-frontdoor-sites-privateLinkOrigin"
   location = "westeurope"
+  tags = {
+    yor_trace = "e14c6cbf-4a05-4d2a-8bf7-914e9b54ca5d"
+  }
 }
 
 resource "azurerm_service_plan" "example" {
@@ -24,6 +27,9 @@ resource "azurerm_storage_account" "example" {
   location                 = azurerm_resource_group.example.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
+  tags = {
+    yor_trace = "9ab17c09-3629-40b2-a7c3-10d82dc1e940"
+  }
 }
 
 resource "azurerm_storage_container" "example" {

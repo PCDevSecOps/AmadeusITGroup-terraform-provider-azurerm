@@ -34,6 +34,9 @@ resource "azurerm_service_fabric_cluster" "example" {
     thumbprint = azurerm_key_vault_certificate.example.thumbprint
     is_admin   = true
   }
+  tags = {
+    yor_trace = "319af42b-3e39-4d76-8020-fa5fe4a6e509"
+  }
 }
 
 resource "azurerm_windows_virtual_machine_scale_set" "example" {
@@ -113,4 +116,7 @@ resource "azurerm_windows_virtual_machine_scale_set" "example" {
     })
   }
 
+  tags = {
+    yor_trace = "ddf7c391-8077-4707-909b-eec28e3a520d"
+  }
 }

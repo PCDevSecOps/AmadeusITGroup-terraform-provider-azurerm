@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "92864a11-eac1-45a6-951e-6ad790e80c7c"
+  }
 }
 
 data "azuread_service_principal" "cosmosdb" {
@@ -49,6 +52,9 @@ resource "azurerm_key_vault" "example" {
       "WrapKey",
     ]
   }
+  tags = {
+    yor_trace = "8693ebcf-3e59-4e64-b655-8d7d4f32885b"
+  }
 }
 
 resource "azurerm_key_vault_key" "example" {
@@ -63,6 +69,9 @@ resource "azurerm_key_vault_key" "example" {
     "wrapKey",
     "unwrapKey",
   ]
+  tags = {
+    yor_trace = "bc1dd0ac-1134-4b52-a358-591bc38d6c61"
+  }
 }
 
 resource "azurerm_cosmosdb_account" "example" {
@@ -80,5 +89,8 @@ resource "azurerm_cosmosdb_account" "example" {
   geo_location {
     location          = azurerm_resource_group.example.location
     failover_priority = 0
+  }
+  tags = {
+    yor_trace = "bd7cac63-7912-40aa-89f2-85d236f678cb"
   }
 }

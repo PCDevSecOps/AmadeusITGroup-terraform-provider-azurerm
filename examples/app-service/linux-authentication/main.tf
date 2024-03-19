@@ -10,6 +10,9 @@ data "azurerm_client_config" "current" {}
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "92866020-af5d-4253-9e51-0e0fc70594aa"
+  }
 }
 
 resource "azurerm_service_plan" "example" {

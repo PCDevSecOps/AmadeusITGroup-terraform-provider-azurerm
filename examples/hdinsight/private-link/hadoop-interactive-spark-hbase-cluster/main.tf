@@ -10,6 +10,9 @@ data "azurerm_subscription" "primary" {}
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-HDInsight-Hadoop"
   location = var.location
+  tags = {
+    yor_trace = "f5ddc9d5-424b-4af8-bca0-efebca75c7d1"
+  }
 }
 
 resource "azurerm_user_assigned_identity" "example" {
@@ -17,6 +20,9 @@ resource "azurerm_user_assigned_identity" "example" {
   location            = azurerm_resource_group.example.location
 
   name = "${var.prefix}-identity"
+  tags = {
+    yor_trace = "992f83ae-b9ef-483b-a0a9-4a20ed0a36ec"
+  }
 }
 
 resource "azurerm_role_assignment" "example" {
@@ -32,6 +38,9 @@ resource "azurerm_virtual_network" "example" {
   address_space       = ["172.16.0.0/16"]
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "ff9d3760-27c0-4fe2-9b5e-45bb434dde17"
+  }
 }
 
 resource "azurerm_subnet" "example" {
@@ -50,6 +59,9 @@ resource "azurerm_public_ip" "example" {
   allocation_method   = "Static"
   sku                 = "Standard"
   zones               = ["1"]
+  tags = {
+    yor_trace = "93e410ab-eeaf-49b0-9497-a3d8ca74a2a0"
+  }
 }
 
 resource "azurerm_nat_gateway" "example" {
@@ -59,6 +71,9 @@ resource "azurerm_nat_gateway" "example" {
   sku_name                = "Standard"
   idle_timeout_in_minutes = 10
   zones                   = ["1"]
+  tags = {
+    yor_trace = "16ebe293-a871-4fd3-ba64-7e4be523e861"
+  }
 }
 
 resource "azurerm_nat_gateway_public_ip_association" "example" {
@@ -84,6 +99,9 @@ resource "azurerm_storage_account" "example" {
   account_replication_type = "LRS"
   account_kind             = "StorageV2"
   is_hns_enabled           = "true"
+  tags = {
+    yor_trace = "c606d4ca-2d37-43f4-9c4b-19d5179b64e7"
+  }
 }
 
 resource "azurerm_storage_data_lake_gen2_filesystem" "example" {
@@ -149,6 +167,9 @@ resource "azurerm_hdinsight_hadoop_cluster" "example" {
       subnet_id          = azurerm_subnet.example.id
       virtual_network_id = azurerm_virtual_network.example.id
     }
+  }
+  tags = {
+    yor_trace = "a9a40026-d2f6-4d2e-a621-8878f81ee8a2"
   }
 }
 
@@ -358,4 +379,7 @@ resource "azurerm_network_security_group" "example" {
       source_port_ranges                    = []
     },
   ]
+  tags = {
+    yor_trace = "cdd49b70-8352-4265-88be-e8a064929ff0"
+  }
 }

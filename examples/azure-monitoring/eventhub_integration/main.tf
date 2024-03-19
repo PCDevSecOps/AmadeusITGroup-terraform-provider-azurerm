@@ -4,6 +4,9 @@
 resource "azurerm_resource_group" "example" {
   name     = "example_rg_eventhub"
   location = "West Europe"
+  tags = {
+    yor_trace = "20518304-ce30-4f46-9c8c-27e33b681eb1"
+  }
 }
 
 resource "azurerm_eventhub_namespace" "example" {
@@ -12,6 +15,9 @@ resource "azurerm_eventhub_namespace" "example" {
   resource_group_name = azurerm_resource_group.example.name
 
   sku = "Standard"
+  tags = {
+    yor_trace = "2c038584-84b5-4d40-a9f7-f7748c7bfa53"
+  }
 }
 
 resource "azurerm_eventhub" "example" {

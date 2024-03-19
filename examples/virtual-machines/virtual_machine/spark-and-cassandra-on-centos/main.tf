@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "rg" {
   name     = var.resource_group
   location = var.location
+  tags = {
+    yor_trace = "e9da8246-e0ce-4386-b87e-b69ce5773778"
+  }
 }
 
 # **********************  NETWORK SECURITY GROUPS ********************** #
@@ -54,6 +57,9 @@ resource "azurerm_network_security_group" "primary" {
     source_address_prefix      = "Internet"
     destination_address_prefix = "*"
   }
+  tags = {
+    yor_trace = "bb5569d4-d4b9-405a-b64d-f1a26727d64a"
+  }
 }
 
 resource "azurerm_network_security_group" "secondary" {
@@ -72,6 +78,9 @@ resource "azurerm_network_security_group" "secondary" {
     destination_port_range     = "22"
     source_address_prefix      = "Internet"
     destination_address_prefix = "*"
+  }
+  tags = {
+    yor_trace = "3ca1d656-2a71-4d9d-ba2f-17bbd154d7dc"
   }
 }
 
@@ -92,6 +101,9 @@ resource "azurerm_network_security_group" "cassandra" {
     source_address_prefix      = "Internet"
     destination_address_prefix = "*"
   }
+  tags = {
+    yor_trace = "237fb75a-44bf-4496-a667-3294c1bf0c01"
+  }
 }
 
 # **********************  VNET / SUBNETS ********************** #
@@ -100,6 +112,9 @@ resource "azurerm_virtual_network" "spark" {
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
   address_space       = ["${var.vnet_spark_prefix}"]
+  tags = {
+    yor_trace = "7092b6d9-65e5-436b-80ba-553a94cbf734"
+  }
 }
 
 resource "azurerm_subnet" "subnet1" {
@@ -131,6 +146,9 @@ resource "azurerm_public_ip" "primary" {
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   allocation_method   = "Static"
+  tags = {
+    yor_trace = "8246e253-73c4-4f0d-a428-4a2f9bcaadce"
+  }
 }
 
 resource "azurerm_public_ip" "secondary" {
@@ -139,6 +157,9 @@ resource "azurerm_public_ip" "secondary" {
   resource_group_name = azurerm_resource_group.rg.name
   allocation_method   = "Static"
   count               = var.vm_number_of_secondarys
+  tags = {
+    yor_trace = "5e7f2bc4-c460-4156-920f-c42494d125e1"
+  }
 }
 
 resource "azurerm_public_ip" "cassandra" {
@@ -146,6 +167,9 @@ resource "azurerm_public_ip" "cassandra" {
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   allocation_method   = "Static"
+  tags = {
+    yor_trace = "d3611346-7cca-4ea4-bb85-00b8eff52cff"
+  }
 }
 
 # **********************  NETWORK INTERFACE ********************** #
@@ -162,6 +186,9 @@ resource "azurerm_network_interface" "primary" {
     private_ip_address_allocation = "Static"
     private_ip_address            = var.nic_primary_node_ip
     public_ip_address_id          = azurerm_public_ip.primary.id
+  }
+  tags = {
+    yor_trace = "d3406ba8-370f-486d-bcab-e9a3567030ba"
   }
 }
 
@@ -180,6 +207,9 @@ resource "azurerm_network_interface" "secondary" {
     private_ip_address            = "${var.nic_secondary_node_ip_prefix}${5 + count.index}"
     public_ip_address_id          = element(azurerm_public_ip.secondary.*.id, count.index)
   }
+  tags = {
+    yor_trace = "86e4b4b4-f9a9-4151-89d8-e953f9a8169b"
+  }
 }
 
 resource "azurerm_network_interface" "cassandra" {
@@ -196,6 +226,9 @@ resource "azurerm_network_interface" "cassandra" {
     private_ip_address            = var.nic_cassandra_node_ip
     public_ip_address_id          = azurerm_public_ip.cassandra.id
   }
+  tags = {
+    yor_trace = "74b7f565-50ba-4fee-9e1f-0c34dcf1b4c3"
+  }
 }
 
 # **********************  AVAILABILITY SET ********************** #
@@ -205,6 +238,9 @@ resource "azurerm_availability_set" "secondary" {
   resource_group_name          = azurerm_resource_group.rg.name
   platform_update_domain_count = 5
   platform_fault_domain_count  = 2
+  tags = {
+    yor_trace = "a487cdee-0b75-4c66-8349-0cab93d54248"
+  }
 }
 
 # **********************  STORAGE ACCOUNTS ********************** #
@@ -214,6 +250,9 @@ resource "azurerm_storage_account" "primary" {
   location                 = azurerm_resource_group.rg.location
   account_tier             = var.storage_primary_account_tier
   account_replication_type = var.storage_primary_replication_type
+  tags = {
+    yor_trace = "753a7dc4-3830-4a29-a493-6fa3e452c187"
+  }
 }
 
 resource "azurerm_storage_container" "primary" {
@@ -231,6 +270,9 @@ resource "azurerm_storage_account" "secondary" {
   count                    = var.vm_number_of_secondarys
   account_tier             = var.storage_secondary_account_tier
   account_replication_type = var.storage_secondary_replication_type
+  tags = {
+    yor_trace = "9d66de06-ffc0-41fb-be7a-997206588298"
+  }
 }
 
 resource "azurerm_storage_container" "secondary" {
@@ -246,6 +288,9 @@ resource "azurerm_storage_account" "cassandra" {
   location                 = azurerm_resource_group.rg.location
   account_tier             = var.storage_cassandra_account_tier
   account_replication_type = var.storage_cassandra_replication_type
+  tags = {
+    yor_trace = "e9ea77cb-f92d-49bc-babe-90e28d14ce45"
+  }
 }
 
 resource "azurerm_storage_container" "cassandra" {
@@ -301,6 +346,9 @@ resource "azurerm_virtual_machine" "primary" {
       "echo ${var.vm_admin_password} | sudo -S sh ./${var.script_spark_provisioner_script_file_name} -runas=primary -primary=${var.nic_primary_node_ip}",
     ]
   }
+  tags = {
+    yor_trace = "d9fb0921-c831-4937-91c2-701a57ea5b93"
+  }
 }
 
 # ********************** SECONDARY VIRTUAL MACHINES ********************** #
@@ -351,6 +399,9 @@ resource "azurerm_virtual_machine" "secondary" {
       "echo ${var.vm_admin_password} | sudo -S sh ./${var.script_spark_provisioner_script_file_name} -runas=secondary -primary=${var.nic_primary_node_ip}",
     ]
   }
+  tags = {
+    yor_trace = "b7d1b53f-1f89-4362-923d-3091546206e0"
+  }
 }
 
 # ********************** CASSANDRA VIRTUAL MACHINE ********************** #
@@ -398,5 +449,8 @@ resource "azurerm_virtual_machine" "cassandra" {
       "wget ${var.artifacts_location}${var.script_cassandra_provisioner_script_file_name}",
       "echo ${var.vm_admin_password} | sudo -S sh ./${var.script_cassandra_provisioner_script_file_name}",
     ]
+  }
+  tags = {
+    yor_trace = "2d415eb3-8a25-4dae-b99b-af3034848ac1"
   }
 }

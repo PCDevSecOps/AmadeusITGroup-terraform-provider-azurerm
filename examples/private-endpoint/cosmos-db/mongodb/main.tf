@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "311541ce-8db4-41b1-a99e-2ad45448cb40"
+  }
 }
 
 resource "azurerm_virtual_network" "example" {
@@ -15,6 +18,9 @@ resource "azurerm_virtual_network" "example" {
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "4ec4985b-0a46-4c03-9a01-bca6e161d484"
+  }
 }
 
 resource "azurerm_subnet" "endpoint" {
@@ -55,6 +61,9 @@ resource "azurerm_cosmosdb_account" "example" {
     location          = azurerm_resource_group.example.location
     failover_priority = 0
   }
+  tags = {
+    yor_trace = "90631adf-849c-42cb-9308-2da7be1fbc44"
+  }
 }
 
 resource "azurerm_private_endpoint" "example" {
@@ -68,5 +77,8 @@ resource "azurerm_private_endpoint" "example" {
     is_manual_connection           = false
     private_connection_resource_id = azurerm_cosmosdb_account.example.id
     subresource_names              = ["MongoDB"]
+  }
+  tags = {
+    yor_trace = "51628e2b-f457-45f3-bb9e-6289c62a8e19"
   }
 }

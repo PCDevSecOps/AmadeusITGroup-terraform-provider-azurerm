@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "1b3654f7-bc58-47f0-a69a-8ea4537748f0"
+  }
 }
 
 resource "azurerm_storage_account" "example" {
@@ -21,6 +24,9 @@ resource "azurerm_storage_account" "example" {
   enable_https_traffic_only       = true
   access_tier                     = "Hot"
   allow_nested_items_to_be_public = true
+  tags = {
+    yor_trace = "61106f53-4146-4c3b-b655-00d1fe443c20"
+  }
 }
 
 resource "azurerm_storage_container" "example" {
@@ -40,6 +46,9 @@ resource "azurerm_storage_account" "example2" {
   enable_https_traffic_only       = true
   access_tier                     = "Hot"
   allow_nested_items_to_be_public = true
+  tags = {
+    yor_trace = "54fce9f8-8710-435c-98b7-081e10a0e1e3"
+  }
 }
 
 resource "azurerm_storage_container" "example2" {

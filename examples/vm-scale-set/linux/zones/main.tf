@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "main" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "14e7297f-7225-4468-915b-d3174d48b3d1"
+  }
 }
 
 resource "azurerm_virtual_network" "main" {
@@ -15,6 +18,9 @@ resource "azurerm_virtual_network" "main" {
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.main.location
   resource_group_name = azurerm_resource_group.main.name
+  tags = {
+    yor_trace = "05344366-956f-492a-adb6-89af14f9d4a1"
+  }
 }
 
 resource "azurerm_subnet" "internal" {
@@ -57,5 +63,8 @@ resource "azurerm_linux_virtual_machine_scale_set" "main" {
   os_disk {
     storage_account_type = "Standard_LRS"
     caching              = "ReadWrite"
+  }
+  tags = {
+    yor_trace = "9605cc8d-b61d-44d0-8c3e-a3a36cc05fb0"
   }
 }

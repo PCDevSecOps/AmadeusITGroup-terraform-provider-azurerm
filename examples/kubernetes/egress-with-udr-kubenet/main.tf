@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-k8s-resources"
   location = var.location
+  tags = {
+    yor_trace = "601c4b5f-dc3b-452f-91bd-9fcbda9b887f"
+  }
 }
 
 resource "azurerm_virtual_network" "example" {
@@ -15,6 +18,9 @@ resource "azurerm_virtual_network" "example" {
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   address_space       = ["10.1.0.0/16"]
+  tags = {
+    yor_trace = "a46cc00d-9099-45a4-af25-038d66893ee4"
+  }
 }
 
 resource "azurerm_subnet" "internal" {
@@ -35,6 +41,9 @@ resource "azurerm_route_table" "example" {
     address_prefix         = "0.0.0.0/0"
     next_hop_type          = "VirtualAppliance"
     next_hop_in_ip_address = var.fwprivate_ip
+  }
+  tags = {
+    yor_trace = "6643faf3-8c7a-46f1-ba82-60752adc41b8"
   }
 }
 
@@ -64,6 +73,9 @@ resource "azurerm_kubernetes_cluster" "example" {
 
   identity {
     type = "SystemAssigned"
+  }
+  tags = {
+    yor_trace = "66ae3914-7c2f-46e5-84f5-8740a7411e42"
   }
 }
 

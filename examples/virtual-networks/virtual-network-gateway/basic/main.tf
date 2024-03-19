@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "c2647183-1fd4-483b-9dfe-c42628019f05"
+  }
 }
 
 resource "azurerm_virtual_network" "example" {
@@ -15,6 +18,9 @@ resource "azurerm_virtual_network" "example" {
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   address_space       = ["10.0.0.0/16"]
+  tags = {
+    yor_trace = "5b7228fa-4b0b-4e8f-a40d-bb894b1e0e20"
+  }
 }
 
 resource "azurerm_subnet" "example" {
@@ -29,6 +35,9 @@ resource "azurerm_public_ip" "example" {
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   allocation_method   = "Dynamic"
+  tags = {
+    yor_trace = "4695cb20-adb5-4a05-b3ff-951bb8b2df32"
+  }
 }
 
 resource "azurerm_virtual_network_gateway" "example" {
@@ -45,5 +54,8 @@ resource "azurerm_virtual_network_gateway" "example" {
     public_ip_address_id          = azurerm_public_ip.example.id
     private_ip_address_allocation = "Dynamic"
     subnet_id                     = azurerm_subnet.example.id
+  }
+  tags = {
+    yor_trace = "0ab5b4f4-1b77-4c96-8a94-e100020555a4"
   }
 }

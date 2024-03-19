@@ -14,6 +14,7 @@ resource "azurerm_resource_group" "example" {
   tags = {
     StorageType = "Standard_LRS"
     type        = "test"
+    yor_trace   = "c80bae99-828a-4817-895d-743f51cf006a"
   }
 }
 
@@ -23,6 +24,9 @@ resource "azurerm_storage_account" "example" {
   location                 = azurerm_resource_group.example.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
+  tags = {
+    yor_trace = "ea21e2c6-997d-43a5-b62c-0ceb8fbe7ea5"
+  }
 }
 
 resource "azurerm_storage_container" "example" {
@@ -36,6 +40,9 @@ resource "azurerm_virtual_network" "example" {
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   address_space       = ["10.10.0.0/16"]
+  tags = {
+    yor_trace = "c55d8ddf-96b1-4c41-966d-9c56e59ce4bd"
+  }
 }
 
 resource "azurerm_subnet" "example" {
@@ -97,6 +104,9 @@ resource "azurerm_network_security_group" "example" {
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
+  tags = {
+    yor_trace = "282e73b6-cf09-4fe7-b3bd-98e6a4253580"
+  }
 }
 
 resource "azurerm_subnet_network_security_group_association" "example" {
@@ -129,6 +139,9 @@ resource "azurerm_user_assigned_identity" "example" {
   name                = "${var.prefix}-uai"
   resource_group_name = azurerm_resource_group.example.name
   location            = azurerm_resource_group.example.location
+  tags = {
+    yor_trace = "ab3e0f00-717f-46e5-b2cc-135b3a935ccb"
+  }
 }
 
 data "azurerm_subscription" "primary" {}
@@ -175,6 +188,7 @@ resource "azurerm_active_directory_domain_service" "example" {
 
   tags = {
     Environment = "test"
+    yor_trace   = "c102447e-cd1a-4036-a428-060f2db1aa4e"
   }
 
   depends_on = [
@@ -251,4 +265,7 @@ resource "azurerm_hdinsight_hadoop_cluster" "example" {
   depends_on = [
     azurerm_virtual_network_dns_servers.example,
   ]
+  tags = {
+    yor_trace = "23edac4f-99b3-4435-be34-3e8cec7ec6bb"
+  }
 }

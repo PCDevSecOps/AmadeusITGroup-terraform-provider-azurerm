@@ -10,6 +10,9 @@ data "azurerm_client_config" "current" {}
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-databricks-cmk"
   location = "West Europe"
+  tags = {
+    yor_trace = "e8ec07ea-c16d-4e25-aab0-46db77d904e1"
+  }
 }
 
 resource "azurerm_databricks_workspace" "example" {
@@ -23,6 +26,7 @@ resource "azurerm_databricks_workspace" "example" {
 
   tags = {
     Environment = "Production"
+    yor_trace   = "050f5ed2-f872-4c63-93c2-d7434375ccca"
   }
 }
 
@@ -42,6 +46,9 @@ resource "azurerm_key_vault" "example" {
 
   purge_protection_enabled   = true
   soft_delete_retention_days = 7
+  tags = {
+    yor_trace = "699efc9d-3586-47ca-8000-ba5e328c90ae"
+  }
 }
 
 resource "azurerm_key_vault_key" "example" {
@@ -60,6 +67,9 @@ resource "azurerm_key_vault_key" "example" {
     "Verify",
     "WrapKey",
   ]
+  tags = {
+    yor_trace = "dd3fc657-4f71-4370-a4f7-f93a53f440bf"
+  }
 }
 
 resource "azurerm_key_vault_access_policy" "terraform" {

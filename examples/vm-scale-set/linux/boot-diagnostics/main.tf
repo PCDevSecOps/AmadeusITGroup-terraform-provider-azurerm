@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "main" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "dd9eb69d-88bf-406d-8c87-d8b222dd6b31"
+  }
 }
 
 resource "azurerm_virtual_network" "main" {
@@ -15,6 +18,9 @@ resource "azurerm_virtual_network" "main" {
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.main.location
   resource_group_name = azurerm_resource_group.main.name
+  tags = {
+    yor_trace = "e0fee1bd-08be-4560-99b0-abd1c073c365"
+  }
 }
 
 resource "azurerm_subnet" "internal" {
@@ -30,6 +36,9 @@ resource "azurerm_storage_account" "main" {
   location                 = azurerm_resource_group.main.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
+  tags = {
+    yor_trace = "88b535c3-02ca-48d4-a8ca-8baca50c1e62"
+  }
 }
 
 resource "azurerm_linux_virtual_machine_scale_set" "main" {
@@ -67,5 +76,8 @@ resource "azurerm_linux_virtual_machine_scale_set" "main" {
 
   boot_diagnostics {
     storage_account_uri = azurerm_storage_account.main.primary_blob_endpoint
+  }
+  tags = {
+    yor_trace = "31293f39-760f-40ea-a9e3-d5d66c39abcf"
   }
 }

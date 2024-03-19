@@ -24,12 +24,18 @@ provider "github" {
 resource "azurerm_resource_group" "test" {
   name     = "example"
   location = "west europe"
+  tags = {
+    yor_trace = "630c6736-7231-4521-9ef2-6b5cacbd10d8"
+  }
 }
 
 resource "azurerm_static_site" "test" {
   name                = "example"
   location            = azurerm_resource_group.test.location
   resource_group_name = azurerm_resource_group.test.name
+  tags = {
+    yor_trace = "2583d9df-371b-4f6e-b523-1f20a28048d3"
+  }
 }
 
 resource "github_actions_secret" "test" {

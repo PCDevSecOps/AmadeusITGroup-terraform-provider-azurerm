@@ -39,6 +39,9 @@ resource "azurerm_virtual_machine" "example" {
   os_profile_linux_config {
     disable_password_authentication = false
   }
+  tags = {
+    yor_trace = "b65b095a-7ed1-476b-95a7-a7762865c432"
+  }
 }
 
 resource "azurerm_managed_disk" "external" {
@@ -49,6 +52,9 @@ resource "azurerm_managed_disk" "external" {
   storage_account_type = "Standard_LRS"
   create_option        = "Empty"
   disk_size_gb         = "10"
+  tags = {
+    yor_trace = "5b353230-2cb8-4a74-9740-0dfe3c5c0db0"
+  }
 }
 
 resource "azurerm_virtual_machine_data_disk_attachment" "external" {

@@ -13,6 +13,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "rg" {
   name     = var.resource_group_name
   location = var.resource_group_location
+  tags = {
+    yor_trace = "270ad58f-2313-4c67-93f6-b51666e4e001"
+  }
 }
 
 # ******* NETWORK SECURITY GROUPS ***********
@@ -60,6 +63,9 @@ resource "azurerm_network_security_group" "primary_nsg" {
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
+  tags = {
+    yor_trace = "941d77b6-fa1e-4d0e-bfcf-b410cc0920cf"
+  }
 }
 
 resource "azurerm_network_security_group" "infra_nsg" {
@@ -104,6 +110,9 @@ resource "azurerm_network_security_group" "infra_nsg" {
     destination_port_range     = "80"
     source_address_prefix      = "*"
     destination_address_prefix = "*"
+  }
+  tags = {
+    yor_trace = "6c127fcc-d026-460b-9172-8bcd6b22bc42"
   }
 }
 
@@ -150,6 +159,9 @@ resource "azurerm_network_security_group" "node_nsg" {
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
+  tags = {
+    yor_trace = "6838db3c-bb01-454f-85c0-e23f4d4e86ff"
+  }
 }
 
 # ******* STORAGE ACCOUNTS ***********
@@ -160,6 +172,9 @@ resource "azurerm_storage_account" "bastion_storage_account" {
   location                 = azurerm_resource_group.rg.location
   account_tier             = var.storage_account_tier
   account_replication_type = var.storage_account_replication_type
+  tags = {
+    yor_trace = "f2809c07-e35b-4ee5-b685-c13d7ee40d47"
+  }
 }
 
 resource "azurerm_storage_account" "primary_storage_account" {
@@ -168,6 +183,9 @@ resource "azurerm_storage_account" "primary_storage_account" {
   location                 = azurerm_resource_group.rg.location
   account_tier             = var.storage_account_tier
   account_replication_type = var.storage_account_replication_type
+  tags = {
+    yor_trace = "0e2f9302-699c-4087-a4ef-2e66767d478b"
+  }
 }
 
 resource "azurerm_storage_account" "infra_storage_account" {
@@ -176,6 +194,9 @@ resource "azurerm_storage_account" "infra_storage_account" {
   location                 = azurerm_resource_group.rg.location
   account_tier             = var.storage_account_tier
   account_replication_type = var.storage_account_replication_type
+  tags = {
+    yor_trace = "cc47dc2f-5239-4557-b97e-90ba4ccb9206"
+  }
 }
 
 resource "azurerm_storage_account" "nodeos_storage_account" {
@@ -184,6 +205,9 @@ resource "azurerm_storage_account" "nodeos_storage_account" {
   location                 = azurerm_resource_group.rg.location
   account_tier             = var.storage_account_tier
   account_replication_type = var.storage_account_replication_type
+  tags = {
+    yor_trace = "c620df40-c04e-435f-ad1a-bfbd08305410"
+  }
 }
 
 resource "azurerm_storage_account" "nodedata_storage_account" {
@@ -192,6 +216,9 @@ resource "azurerm_storage_account" "nodedata_storage_account" {
   location                 = azurerm_resource_group.rg.location
   account_tier             = var.storage_account_tier
   account_replication_type = var.storage_account_replication_type
+  tags = {
+    yor_trace = "5f296aaf-43c3-4434-a4a2-07d47087901a"
+  }
 }
 
 resource "azurerm_storage_account" "registry_storage_account" {
@@ -200,6 +227,9 @@ resource "azurerm_storage_account" "registry_storage_account" {
   location                 = azurerm_resource_group.rg.location
   account_tier             = var.storage_account_tier
   account_replication_type = var.storage_account_replication_type
+  tags = {
+    yor_trace = "d838e1d5-5751-439f-ac91-29fce3736b21"
+  }
 }
 
 resource "azurerm_storage_account" "persistent_volume_storage_account" {
@@ -208,6 +238,9 @@ resource "azurerm_storage_account" "persistent_volume_storage_account" {
   location                 = azurerm_resource_group.rg.location
   account_tier             = var.storage_account_tier
   account_replication_type = var.storage_account_replication_type
+  tags = {
+    yor_trace = "941f3c6f-a8ab-4687-b771-5dd41acc948a"
+  }
 }
 
 # ******* AVAILABILITY SETS ***********
@@ -216,18 +249,27 @@ resource "azurerm_availability_set" "primary" {
   name                = "primaryavailabilityset"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
+  tags = {
+    yor_trace = "3bbbe3a6-9118-4428-be2f-47421a35dfd7"
+  }
 }
 
 resource "azurerm_availability_set" "infra" {
   name                = "infraavailabilityset"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
+  tags = {
+    yor_trace = "a86396e9-fae1-4590-9e28-6181cd85343c"
+  }
 }
 
 resource "azurerm_availability_set" "node" {
   name                = "nodeavailabilityset"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
+  tags = {
+    yor_trace = "b9a25b09-61ae-47d6-994b-ed5b16f7de6a"
+  }
 }
 
 # ******* IP ADDRESSES ***********
@@ -238,6 +280,9 @@ resource "azurerm_public_ip" "bastion_pip" {
   location            = azurerm_resource_group.rg.location
   allocation_method   = "Static"
   domain_name_label   = "${var.openshift_cluster_prefix}-bastion"
+  tags = {
+    yor_trace = "3f9ea03e-ee78-4993-8444-233d5b7d143e"
+  }
 }
 
 resource "azurerm_public_ip" "openshift_primary_pip" {
@@ -246,6 +291,9 @@ resource "azurerm_public_ip" "openshift_primary_pip" {
   location            = azurerm_resource_group.rg.location
   allocation_method   = "Static"
   domain_name_label   = var.openshift_cluster_prefix
+  tags = {
+    yor_trace = "2f963d64-aa38-4b33-a4b5-be4feb07b944"
+  }
 }
 
 resource "azurerm_public_ip" "infra_lb_pip" {
@@ -254,6 +302,9 @@ resource "azurerm_public_ip" "infra_lb_pip" {
   location            = azurerm_resource_group.rg.location
   allocation_method   = "Static"
   domain_name_label   = "${var.openshift_cluster_prefix}infrapip"
+  tags = {
+    yor_trace = "4f06ed70-b2a5-431a-b6db-b7a068bcf99f"
+  }
 }
 
 # ******* VNETS / SUBNETS ***********
@@ -264,6 +315,9 @@ resource "azurerm_virtual_network" "vnet" {
   resource_group_name = azurerm_resource_group.rg.name
   address_space       = ["10.0.0.0/8"]
   depends_on          = ["azurerm_virtual_network.vnet"]
+  tags = {
+    yor_trace = "56f49808-3e71-44e5-a909-ae1f8ba3e9bf"
+  }
 }
 
 resource "azurerm_subnet" "primary_subnet" {
@@ -292,6 +346,9 @@ resource "azurerm_lb" "primary_lb" {
   frontend_ip_configuration {
     name                 = "LoadBalancerFrontEnd"
     public_ip_address_id = azurerm_public_ip.openshift_primary_pip.id
+  }
+  tags = {
+    yor_trace = "29f128d0-555b-4d3e-872b-5c1323638108"
   }
 }
 
@@ -352,6 +409,9 @@ resource "azurerm_lb" "infra_lb" {
   frontend_ip_configuration {
     name                 = "LoadBalancerFrontEnd"
     public_ip_address_id = azurerm_public_ip.infra_lb_pip.id
+  }
+  tags = {
+    yor_trace = "19def35c-8fb5-47f2-b54e-9a250602b77c"
   }
 }
 
@@ -423,6 +483,9 @@ resource "azurerm_network_interface" "bastion_nic" {
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.bastion_pip.id
   }
+  tags = {
+    yor_trace = "3bda57a9-5f74-4e42-beb6-213e4e78ed05"
+  }
 }
 
 resource "azurerm_network_interface" "primary_nic" {
@@ -439,6 +502,9 @@ resource "azurerm_network_interface" "primary_nic" {
     load_balancer_backend_address_pools_ids = ["${azurerm_lb_backend_address_pool.primary_lb.id}"]
     load_balancer_inbound_nat_rules_ids     = ["${element(azurerm_lb_nat_rule.primary_lb.*.id, count.index)}"]
   }
+  tags = {
+    yor_trace = "e146c3dd-9ca2-43a4-af82-0fe82666f773"
+  }
 }
 
 resource "azurerm_network_interface" "infra_nic" {
@@ -454,6 +520,9 @@ resource "azurerm_network_interface" "infra_nic" {
     private_ip_address_allocation           = "Dynamic"
     load_balancer_backend_address_pools_ids = ["${azurerm_lb_backend_address_pool.infra_lb.id}"]
   }
+  tags = {
+    yor_trace = "80e64f0d-03b9-4f74-80eb-ac43bf9c3713"
+  }
 }
 
 resource "azurerm_network_interface" "node_nic" {
@@ -467,6 +536,9 @@ resource "azurerm_network_interface" "node_nic" {
     name                          = "nodeip${count.index}"
     subnet_id                     = azurerm_subnet.node_subnet.id
     private_ip_address_allocation = "Dynamic"
+  }
+  tags = {
+    yor_trace = "2d34eefc-d457-479c-853c-2c1284863898"
   }
 }
 
@@ -483,6 +555,7 @@ resource "azurerm_virtual_machine" "bastion" {
 
   tags = {
     displayName = "${var.openshift_cluster_prefix}-bastion VM Creation"
+    yor_trace   = "3fd4dd63-b92f-4b84-a65f-7662ce4cb6e4"
   }
 
   os_profile {
@@ -532,6 +605,7 @@ resource "azurerm_virtual_machine" "primary" {
 
   tags = {
     displayName = "${var.openshift_cluster_prefix}-primary VM Creation"
+    yor_trace   = "229f29ff-bbaf-47ad-a03a-1552a197c2ec"
   }
 
   connection {
@@ -614,6 +688,7 @@ resource "azurerm_virtual_machine" "infra" {
 
   tags = {
     displayName = "${var.openshift_cluster_prefix}-infra VM Creation"
+    yor_trace   = "cb56f070-cce8-4aa2-9bfe-c9fb41a8c0ed"
   }
 
   connection {
@@ -691,6 +766,7 @@ resource "azurerm_virtual_machine" "node" {
 
   tags = {
     displayName = "${var.openshift_cluster_prefix}-node VM Creation"
+    yor_trace   = "44060c20-9609-43b2-9f0c-00c8e02a0c02"
   }
 
   connection {

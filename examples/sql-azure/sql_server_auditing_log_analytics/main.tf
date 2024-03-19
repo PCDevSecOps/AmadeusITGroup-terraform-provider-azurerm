@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "e0e9ec73-8c22-4e5c-bff5-b69a77937cdb"
+  }
 }
 
 resource "azurerm_mssql_server" "example" {
@@ -17,6 +20,9 @@ resource "azurerm_mssql_server" "example" {
   version                      = "12.0"
   administrator_login          = "mradministrator"
   administrator_login_password = "thisIsDog11"
+  tags = {
+    yor_trace = "576c6da5-69d7-4c7e-a7c8-6eb199d31194"
+  }
 }
 
 resource "azurerm_log_analytics_workspace" "example" {
@@ -25,6 +31,9 @@ resource "azurerm_log_analytics_workspace" "example" {
   resource_group_name = azurerm_resource_group.example.name
   sku                 = "PerGB2018"
   retention_in_days   = 30
+  tags = {
+    yor_trace = "f70d9929-7aef-46fe-a076-714747ae5bbd"
+  }
 }
 
 resource "azurerm_monitor_diagnostic_setting" "example" {

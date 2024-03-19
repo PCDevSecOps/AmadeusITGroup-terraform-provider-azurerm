@@ -4,6 +4,9 @@
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "98510dbc-c432-4531-ad7d-d594714db170"
+  }
 }
 
 resource "azurerm_virtual_network" "example" {
@@ -11,6 +14,9 @@ resource "azurerm_virtual_network" "example" {
   resource_group_name = azurerm_resource_group.example.name
   location            = azurerm_resource_group.example.location
   address_space       = ["10.0.0.0/16"]
+  tags = {
+    yor_trace = "77d1f675-73c6-440c-80d1-b82d60d60227"
+  }
 }
 
 resource "azurerm_subnet" "example" {

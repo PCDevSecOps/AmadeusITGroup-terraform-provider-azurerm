@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-cdn-frontdoor-managed-ssl-example"
   location = "westeurope"
+  tags = {
+    yor_trace = "4d2a272b-5ffc-453f-bcc4-e2741664b015"
+  }
 }
 
 resource "azurerm_cdn_frontdoor_profile" "example" {
@@ -27,6 +30,9 @@ resource "azurerm_cdn_frontdoor_profile" "example" {
 resource "azurerm_dns_zone" "example" {
   name                = "example.com" # change this to be your domain name
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "d7dc91cb-ed9f-4db6-81cf-f6c3d0ade346"
+  }
 }
 
 resource "azurerm_cdn_frontdoor_firewall_policy" "example" {
@@ -280,6 +286,9 @@ resource "azurerm_dns_txt_record" "contoso" {
   record {
     value = azurerm_cdn_frontdoor_custom_domain.contoso.validation_token
   }
+  tags = {
+    yor_trace = "6fabe3bc-52f7-4250-9836-d4f208efbacd"
+  }
 }
 
 resource "azurerm_dns_txt_record" "fabrikam" {
@@ -291,6 +300,9 @@ resource "azurerm_dns_txt_record" "fabrikam" {
   record {
     value = azurerm_cdn_frontdoor_custom_domain.fabrikam.validation_token
   }
+  tags = {
+    yor_trace = "bed5aaba-7aaa-4047-8dcd-93d8eefb7ec7"
+  }
 }
 
 resource "azurerm_dns_cname_record" "contoso" {
@@ -301,6 +313,9 @@ resource "azurerm_dns_cname_record" "contoso" {
   resource_group_name = azurerm_resource_group.example.name
   ttl                 = 3600
   record              = azurerm_cdn_frontdoor_endpoint.example.host_name
+  tags = {
+    yor_trace = "65067856-f008-4033-868b-10c7e3e37392"
+  }
 }
 
 resource "azurerm_dns_cname_record" "fabrikam" {
@@ -311,4 +326,7 @@ resource "azurerm_dns_cname_record" "fabrikam" {
   resource_group_name = azurerm_resource_group.example.name
   ttl                 = 3600
   record              = azurerm_cdn_frontdoor_endpoint.example.host_name
+  tags = {
+    yor_trace = "42900a1b-52a4-4271-af8c-01931e0bfc39"
+  }
 }

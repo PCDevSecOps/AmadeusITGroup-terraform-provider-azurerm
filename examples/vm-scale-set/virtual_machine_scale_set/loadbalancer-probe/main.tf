@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "6fd11133-9236-4749-8d6c-49beff51cffb"
+  }
 }
 
 resource "azurerm_virtual_network" "example" {
@@ -15,6 +18,9 @@ resource "azurerm_virtual_network" "example" {
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "4cf98442-5daa-49f2-980d-91a2e93e19fd"
+  }
 }
 
 resource "azurerm_subnet" "example" {
@@ -30,6 +36,9 @@ resource "azurerm_public_ip" "example" {
   resource_group_name = azurerm_resource_group.example.name
   allocation_method   = "Dynamic"
   domain_name_label   = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "d1498214-0077-48a5-8ee4-4fcd6bb99dfa"
+  }
 }
 
 resource "azurerm_lb" "example" {
@@ -40,6 +49,9 @@ resource "azurerm_lb" "example" {
   frontend_ip_configuration {
     name                 = "PublicIPAddress"
     public_ip_address_id = azurerm_public_ip.example.id
+  }
+  tags = {
+    yor_trace = "4a7ccffd-70c0-4389-9244-7e84f8f903fa"
   }
 }
 
@@ -105,4 +117,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "example" {
   }
 
   depends_on = [azurerm_lb_probe.example]
+  tags = {
+    yor_trace = "649e4e94-84c3-465f-b201-66b0bb688ad4"
+  }
 }

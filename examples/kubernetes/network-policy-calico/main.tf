@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-k8s-resources"
   location = var.location
+  tags = {
+    yor_trace = "904e0905-e261-4a1e-a146-1f9b3c90543f"
+  }
 }
 
 resource "azurerm_virtual_network" "example" {
@@ -15,6 +18,9 @@ resource "azurerm_virtual_network" "example" {
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   address_space       = ["10.1.0.0/16"]
+  tags = {
+    yor_trace = "72de0e4b-9bc9-4dd2-aaf1-c4286977ec26"
+  }
 }
 
 resource "azurerm_subnet" "internal" {
@@ -46,6 +52,9 @@ resource "azurerm_kubernetes_cluster" "example" {
   identity {
     type = "SystemAssigned"
   }
+  tags = {
+    yor_trace = "faab1775-8cc7-4aed-8175-709993ddf75d"
+  }
 }
 
 resource "azurerm_kubernetes_cluster_node_pool" "user" {
@@ -54,4 +63,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "user" {
   vm_size               = "Standard_DS2_v2"
   node_count            = 1
   vnet_subnet_id        = azurerm_subnet.internal.id
+  tags = {
+    yor_trace = "8bc43642-b933-4392-a328-fbac15ba8083"
+  }
 }

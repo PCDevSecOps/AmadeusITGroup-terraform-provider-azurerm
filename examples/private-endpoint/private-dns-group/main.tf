@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "b01e123c-2335-44cf-809a-ec6766802378"
+  }
 }
 
 resource "azurerm_virtual_network" "example" {
@@ -15,6 +18,9 @@ resource "azurerm_virtual_network" "example" {
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "4bbf55a8-66c3-460a-9ef7-f43835f8c66d"
+  }
 }
 
 resource "azurerm_subnet" "endpoint" {
@@ -29,6 +35,9 @@ resource "azurerm_subnet" "endpoint" {
 resource "azurerm_private_dns_zone" "example" {
   name                = "privatelink.postgres.database.azure.com"
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "ceb635e6-9dc5-4c93-84bc-6b6a7e95e0bc"
+  }
 }
 
 resource "azurerm_postgresql_server" "example" {
@@ -47,6 +56,9 @@ resource "azurerm_postgresql_server" "example" {
   administrator_login_password = "H@Sh1CoR3!"
   version                      = "9.5"
   ssl_enforcement_enabled      = true
+  tags = {
+    yor_trace = "4608f08e-4605-4f85-9f3b-2e0e3c653016"
+  }
 }
 
 resource "azurerm_private_endpoint" "example" {
@@ -65,5 +77,8 @@ resource "azurerm_private_endpoint" "example" {
     is_manual_connection           = false
     private_connection_resource_id = azurerm_postgresql_server.example.id
     subresource_names              = ["postgresqlServer"]
+  }
+  tags = {
+    yor_trace = "8a24b5ec-b87b-4761-8135-38963f26de2d"
   }
 }

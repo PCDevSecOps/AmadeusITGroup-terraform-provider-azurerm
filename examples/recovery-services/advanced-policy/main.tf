@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "0452a4ba-d8b6-4c97-86fb-562a73648b3e"
+  }
 }
 
 resource "azurerm_recovery_services_vault" "example" {
@@ -15,6 +18,9 @@ resource "azurerm_recovery_services_vault" "example" {
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   sku                 = "Standard"
+  tags = {
+    yor_trace = "c3158ee0-754c-4c89-a4d0-b100b92ecffb"
+  }
 }
 
 resource "azurerm_backup_policy_vm" "example" {
@@ -45,5 +51,8 @@ resource "azurerm_backup_policy_vm" "example" {
     weeks    = ["First", "Second"]
     weekdays = ["Monday", "Wednesday"]
     count    = 100
+  }
+  tags = {
+    yor_trace = "1faa8435-e34b-4b08-92a4-4fd058456454"
   }
 }

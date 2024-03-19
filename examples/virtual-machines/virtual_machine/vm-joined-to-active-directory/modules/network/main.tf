@@ -11,6 +11,9 @@ resource "azurerm_virtual_network" "main" {
   location            = var.location
   resource_group_name = var.resource_group_name
   dns_servers         = ["10.0.1.4", "8.8.8.8"]
+  tags = {
+    yor_trace = "9abeee9a-74c0-4b1d-9b0a-f151de91708f"
+  }
 }
 
 resource "azurerm_subnet" "domain-controllers" {

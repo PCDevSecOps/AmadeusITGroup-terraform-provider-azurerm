@@ -50,4 +50,7 @@ resource "azurerm_service_fabric_cluster" "main" {
     thumbprint_secondary = azurerm_key_vault_certificate.secondary.thumbprint
     x509_store_name      = "My"
   }
+  tags = {
+    yor_trace = "c72591ac-daf0-435f-a7f6-2630139ebdfa"
+  }
 }

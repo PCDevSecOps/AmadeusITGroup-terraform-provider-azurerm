@@ -13,6 +13,9 @@ locals {
 resource "azurerm_resource_group" "main" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "3c981391-772e-47c4-b5ab-d7b4724ebb8c"
+  }
 }
 
 resource "azurerm_virtual_network" "main" {
@@ -20,6 +23,9 @@ resource "azurerm_virtual_network" "main" {
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.main.location
   resource_group_name = azurerm_resource_group.main.name
+  tags = {
+    yor_trace = "8746cd19-5af2-428c-ac29-eea45c881e8d"
+  }
 }
 
 resource "azurerm_subnet" "internal" {
@@ -35,4 +41,7 @@ resource "azurerm_public_ip" "main" {
   resource_group_name = azurerm_resource_group.main.name
   allocation_method   = "Static"
   domain_name_label   = "${local.vmss_name}-pip"
+  tags = {
+    yor_trace = "1fcc1e32-4e00-40c9-a51f-b52e7b81b28d"
+  }
 }

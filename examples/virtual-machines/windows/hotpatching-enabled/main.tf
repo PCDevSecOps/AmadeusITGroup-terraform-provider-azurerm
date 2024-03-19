@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "main" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "823d761b-ef65-48f6-bd00-28fb243fce2a"
+  }
 }
 
 resource "azurerm_virtual_network" "main" {
@@ -15,6 +18,9 @@ resource "azurerm_virtual_network" "main" {
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.main.location
   resource_group_name = azurerm_resource_group.main.name
+  tags = {
+    yor_trace = "2d8ec2ee-b64e-4bbc-b7bd-f36b5539e781"
+  }
 }
 
 resource "azurerm_subnet" "internal" {
@@ -33,6 +39,9 @@ resource "azurerm_network_interface" "main" {
     name                          = "internal"
     subnet_id                     = azurerm_subnet.internal.id
     private_ip_address_allocation = "Dynamic"
+  }
+  tags = {
+    yor_trace = "b7044010-6c52-4d90-9edd-acd3d272ef55"
   }
 }
 
@@ -62,4 +71,7 @@ resource "azurerm_windows_virtual_machine" "main" {
 
   patch_mode          = "AutomaticByPlatform"
   hotpatching_enabled = true
+  tags = {
+    yor_trace = "11cede75-c609-4522-84cf-2e94b809b62e"
+  }
 }

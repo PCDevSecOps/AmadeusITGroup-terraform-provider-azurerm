@@ -10,6 +10,9 @@ resource "azurerm_virtual_network" "example" {
   resource_group_name = data.azurerm_resource_group.example.name
   location            = data.azurerm_resource_group.example.location
   address_space       = ["10.0.0.0/16"]
+  tags = {
+    yor_trace = "56a70d9a-ac04-4b4c-8460-ac33581fdc1c"
+  }
 }
 
 resource "azurerm_subnet" "example" {

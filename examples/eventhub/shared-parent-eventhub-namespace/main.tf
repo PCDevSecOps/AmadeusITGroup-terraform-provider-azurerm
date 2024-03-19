@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "cb8445af-ef6c-498a-b31c-f79685513023"
+  }
 }
 
 resource "azurerm_eventhub_namespace" "example" {
@@ -19,6 +22,7 @@ resource "azurerm_eventhub_namespace" "example" {
 
   tags = {
     environment = "Examples"
+    yor_trace   = "99d3b6eb-cf21-4090-a931-ef1d05d210a3"
   }
 }
 

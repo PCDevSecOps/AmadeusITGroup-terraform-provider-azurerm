@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "c96ba66c-a592-400f-afe2-d2fd8c28b7db"
+  }
 }
 
 module "virtual-network" {
@@ -28,6 +31,9 @@ resource "azurerm_recovery_services_vault" "example" {
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   sku                 = "Standard"
+  tags = {
+    yor_trace = "7e7d14c5-3ba1-4c85-a1cb-606fd38e7d79"
+  }
 }
 
 resource "azurerm_backup_policy_vm" "example" {
@@ -43,6 +49,9 @@ resource "azurerm_backup_policy_vm" "example" {
   retention_daily {
     count = 10
   }
+  tags = {
+    yor_trace = "2316d217-7177-49cb-aef9-85ca210775ac"
+  }
 }
 
 resource "azurerm_backup_protected_vm" "example" {
@@ -50,4 +59,7 @@ resource "azurerm_backup_protected_vm" "example" {
   recovery_vault_name = azurerm_recovery_services_vault.example.name
   source_vm_id        = module.virtual-machine.id
   backup_policy_id    = azurerm_backup_policy_vm.example.id
+  tags = {
+    yor_trace = "81b47ce8-719e-4b2d-ba0f-022dbf8a694b"
+  }
 }

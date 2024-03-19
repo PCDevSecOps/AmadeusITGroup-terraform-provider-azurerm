@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "ae5223ea-0b16-40d0-ae84-a87929302571"
+  }
 }
 
 resource "azurerm_public_ip" "example" {
@@ -15,12 +18,18 @@ resource "azurerm_public_ip" "example" {
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   allocation_method   = "Static"
+  tags = {
+    yor_trace = "27eaaefa-4b3e-4cc3-aa1f-30a1d6b0c9f2"
+  }
 }
 
 resource "azurerm_application_security_group" "example" {
   name                = "${var.prefix}-appsg"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "aac856b7-23dd-4f6f-bd64-555c62a23979"
+  }
 }
 
 resource "azurerm_network_interface" "example" {
@@ -33,6 +42,9 @@ resource "azurerm_network_interface" "example" {
     subnet_id                     = azurerm_subnet.example.id
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.example.id
+  }
+  tags = {
+    yor_trace = "a0be84fc-8b2d-4e2e-9317-c5f1ff024f8c"
   }
 }
 
@@ -60,6 +72,9 @@ resource "azurerm_linux_virtual_machine" "example" {
     storage_account_type = "Standard_LRS"
     caching              = "ReadWrite"
   }
+  tags = {
+    yor_trace = "06b73488-2504-4b1a-81f3-8519e3d9bd09"
+  }
 }
 
 resource "azurerm_network_interface_application_security_group_association" "example" {
@@ -73,6 +88,9 @@ resource "azurerm_network_security_group" "example" {
   name                = "${var.prefix}-nsg"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "67c506ef-e21f-4c01-9b56-71d2169cb193"
+  }
 }
 
 resource "azurerm_virtual_network" "example" {
@@ -80,6 +98,9 @@ resource "azurerm_virtual_network" "example" {
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   address_space       = ["10.0.0.0/8"]
+  tags = {
+    yor_trace = "dfa4881c-01cc-4234-ab69-db1863d41174"
+  }
 }
 
 resource "azurerm_subnet" "example" {

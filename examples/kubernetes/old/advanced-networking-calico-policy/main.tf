@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "test" {
   name     = "${var.prefix}-anw-resources"
   location = var.location
+  tags = {
+    yor_trace = "40cd8cea-fed2-4329-a557-a0413f1d146f"
+  }
 }
 
 resource "azurerm_route_table" "test" {
@@ -21,6 +24,9 @@ resource "azurerm_route_table" "test" {
     next_hop_type          = "VirtualAppliance"
     next_hop_in_ip_address = "10.10.1.1"
   }
+  tags = {
+    yor_trace = "7d4de663-20fe-4e77-8a19-a451cece81a8"
+  }
 }
 
 resource "azurerm_virtual_network" "test" {
@@ -28,6 +34,9 @@ resource "azurerm_virtual_network" "test" {
   location            = azurerm_resource_group.test.location
   resource_group_name = azurerm_resource_group.test.name
   address_space       = ["10.1.0.0/16"]
+  tags = {
+    yor_trace = "afe9cf6a-cf5b-4279-9f0e-7cd4b6bae1c6"
+  }
 }
 
 resource "azurerm_subnet" "test" {
@@ -75,5 +84,8 @@ resource "azurerm_kubernetes_cluster" "test" {
   network_profile {
     network_plugin = "azure"
     network_policy = "calico"
+  }
+  tags = {
+    yor_trace = "5a85ccd1-edcf-4259-9436-fa46c06fcc1d"
   }
 }

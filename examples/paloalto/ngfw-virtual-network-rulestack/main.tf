@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "dd180f9d-0de1-4585-868e-8be22d857068"
+  }
 }
 
 resource "azurerm_public_ip" "example" {
@@ -16,6 +19,9 @@ resource "azurerm_public_ip" "example" {
   resource_group_name = azurerm_resource_group.example.name
   allocation_method   = "Static"
   sku                 = "Standard"
+  tags = {
+    yor_trace = "154e947e-ac46-48b1-aa42-2329ea3416cd"
+  }
 }
 
 resource "azurerm_public_ip" "egress" {
@@ -24,12 +30,18 @@ resource "azurerm_public_ip" "egress" {
   resource_group_name = azurerm_resource_group.example.name
   allocation_method   = "Static"
   sku                 = "Standard"
+  tags = {
+    yor_trace = "380807c6-a6e3-4ec0-91f9-60006b093abc"
+  }
 }
 
 resource "azurerm_network_security_group" "example" {
   name                = "${var.prefix}SecurityGroup1"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "994b563b-057b-4eec-bb2a-3a7d6dfe7eb3"
+  }
 }
 
 resource "azurerm_virtual_network" "example" {
@@ -40,6 +52,7 @@ resource "azurerm_virtual_network" "example" {
 
   tags = {
     environment = "ManualTest"
+    yor_trace   = "c616bb6a-fbb1-4a9f-95b1-9529ec0c8a76"
   }
 }
 

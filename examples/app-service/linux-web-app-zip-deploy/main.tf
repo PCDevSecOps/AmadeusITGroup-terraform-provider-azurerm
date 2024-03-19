@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}RG-zipdeploy"
   location = var.location
+  tags = {
+    yor_trace = "661ebbfb-1994-4fc8-ae2e-c2572a088da9"
+  }
 }
 
 resource "azurerm_service_plan" "example" {

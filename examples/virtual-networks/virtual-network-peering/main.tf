@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "70380c92-a383-4c86-9c24-f68cd6723cf5"
+  }
 }
 
 resource "azurerm_virtual_network" "first" {
@@ -20,6 +23,9 @@ resource "azurerm_virtual_network" "first" {
     name           = "subnet1"
     address_prefix = "10.0.0.0/24"
   }
+  tags = {
+    yor_trace = "af2262d6-852b-4065-a6e2-9dbed9d80dd7"
+  }
 }
 
 resource "azurerm_virtual_network" "second" {
@@ -31,6 +37,9 @@ resource "azurerm_virtual_network" "second" {
   subnet {
     name           = "subnet1"
     address_prefix = "192.168.0.0/24"
+  }
+  tags = {
+    yor_trace = "471bf4f1-e987-4c68-9988-1b19ed06a769"
   }
 }
 

@@ -13,6 +13,9 @@ data "azurerm_databricks_workspace_private_endpoint_connection" "example" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-databricks-private-endpoint"
   location = "eastus2"
+  tags = {
+    yor_trace = "d1ac252a-d0b1-4f9f-ada5-d3d6dc08b1d0"
+  }
 }
 
 resource "azurerm_virtual_network" "example" {
@@ -20,6 +23,9 @@ resource "azurerm_virtual_network" "example" {
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "0f851308-daef-448d-8a40-36b3d00f4b2b"
+  }
 }
 
 resource "azurerm_subnet" "public" {
@@ -85,6 +91,9 @@ resource "azurerm_network_security_group" "example" {
   name                = "${var.prefix}-nsg-databricks"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "de0e71b2-7f9e-4e8f-9978-bfee110c2c3f"
+  }
 }
 
 resource "azurerm_databricks_workspace" "example" {
@@ -110,6 +119,7 @@ resource "azurerm_databricks_workspace" "example" {
   tags = {
     Environment = "Production"
     Pricing     = "Premium"
+    yor_trace   = "07ba9f36-6396-430c-a51d-e7adfc1e061a"
   }
 }
 
@@ -125,6 +135,9 @@ resource "azurerm_private_endpoint" "databricks" {
     private_connection_resource_id = azurerm_databricks_workspace.example.id
     subresource_names              = ["databricks_ui_api"]
   }
+  tags = {
+    yor_trace = "c869f600-dc65-4e84-b288-20255dd1016c"
+  }
 }
 
 resource "azurerm_private_dns_zone" "example" {
@@ -132,6 +145,9 @@ resource "azurerm_private_dns_zone" "example" {
 
   name                = "privatelink.azuredatabricks.net"
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "007943da-8fa7-4f9a-adf7-6bcebe3befc4"
+  }
 }
 
 resource "azurerm_private_dns_cname_record" "example" {
@@ -140,6 +156,9 @@ resource "azurerm_private_dns_cname_record" "example" {
   resource_group_name = azurerm_resource_group.example.name
   ttl                 = 300
   record              = "eastus2-c2.azuredatabricks.net"
+  tags = {
+    yor_trace = "f5919d55-7851-47e7-8d10-bc9de272782b"
+  }
 }
 
 output "databricks_workspace_private_endpoint_connection_workspace_id" {

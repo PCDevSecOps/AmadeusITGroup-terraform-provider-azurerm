@@ -61,4 +61,7 @@ resource "azurerm_virtual_machine_scale_set" "example" {
     }
 SETTINGS
   }
+  tags = {
+    yor_trace = "58b70354-f738-4a60-95e7-f8b2e0fb04ef"
+  }
 }

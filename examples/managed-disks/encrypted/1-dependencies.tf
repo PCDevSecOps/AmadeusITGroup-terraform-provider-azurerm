@@ -10,6 +10,9 @@ data "azurerm_client_config" "current" {}
 resource "azurerm_resource_group" "test" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "5c73b4a9-50e1-484c-a2a1-462742b88a39"
+  }
 }
 
 resource "azurerm_key_vault" "test" {
@@ -19,4 +22,7 @@ resource "azurerm_key_vault" "test" {
   tenant_id                   = data.azurerm_client_config.current.tenant_id
   sku_name                    = "premium"
   enabled_for_disk_encryption = true
+  tags = {
+    yor_trace = "005a32bd-3f63-4537-a9bd-d5484460e0e3"
+  }
 }

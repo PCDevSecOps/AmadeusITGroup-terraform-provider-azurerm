@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-k8s-resources"
   location = var.location
+  tags = {
+    yor_trace = "62557edd-c80d-4ba2-b170-90ffb78131f8"
+  }
 }
 
 resource "azurerm_kubernetes_cluster" "example" {
@@ -24,5 +27,8 @@ resource "azurerm_kubernetes_cluster" "example" {
 
   identity {
     type = "SystemAssigned"
+  }
+  tags = {
+    yor_trace = "bed797ce-06d5-4031-a3db-04660db92dad"
   }
 }

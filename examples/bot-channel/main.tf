@@ -10,6 +10,9 @@ data "azurerm_client_config" "current" {}
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "558aecc2-a665-4bd8-aaa2-bbd262e34f2c"
+  }
 }
 
 resource "azurerm_bot_channels_registration" "example" {
@@ -18,6 +21,9 @@ resource "azurerm_bot_channels_registration" "example" {
   resource_group_name = azurerm_resource_group.example.name
   sku                 = "F0"
   microsoft_app_id    = data.azurerm_client_config.current.client_id
+  tags = {
+    yor_trace = "d523d54b-96f5-4a94-95b3-f87e0a002b9d"
+  }
 }
 
 resource "azurerm_bot_channel_directline" "example" {

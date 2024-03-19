@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "main" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "e26bc0de-8ebc-4e8a-8909-d8be81ea6cb0"
+  }
 }
 
 resource "azurerm_virtual_network" "main" {
@@ -15,6 +18,9 @@ resource "azurerm_virtual_network" "main" {
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.main.location
   resource_group_name = azurerm_resource_group.main.name
+  tags = {
+    yor_trace = "0dd65018-92ba-4391-98a1-4d47150decce"
+  }
 }
 
 resource "azurerm_subnet" "internal" {
@@ -28,6 +34,9 @@ resource "azurerm_user_assigned_identity" "main" {
   name                = "${var.prefix}-vmssidentity"
   resource_group_name = azurerm_resource_group.main.name
   location            = azurerm_resource_group.main.location
+  tags = {
+    yor_trace = "18077ef1-7966-4c0c-a462-9f8908a14af5"
+  }
 }
 
 resource "azurerm_linux_virtual_machine_scale_set" "main" {
@@ -68,5 +77,8 @@ resource "azurerm_linux_virtual_machine_scale_set" "main" {
     identity_ids = [
       azurerm_user_assigned_identity.main.id,
     ]
+  }
+  tags = {
+    yor_trace = "540b4f1b-371b-4ec6-8cdd-252e38aff689"
   }
 }

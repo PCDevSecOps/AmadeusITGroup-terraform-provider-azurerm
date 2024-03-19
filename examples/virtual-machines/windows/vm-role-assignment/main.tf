@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "example-resources"
   location = var.location
+  tags = {
+    yor_trace = "2f8053de-6a68-45c3-95bb-708b31614ca3"
+  }
 }
 
 # Virtual Machine Resources
@@ -17,6 +20,9 @@ resource "azurerm_virtual_network" "example" {
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "0e0a9dac-94bf-4473-923d-93f845460aec"
+  }
 }
 
 resource "azurerm_subnet" "example" {
@@ -35,6 +41,9 @@ resource "azurerm_network_interface" "example" {
     name                          = "example-ip"
     subnet_id                     = azurerm_subnet.example.id
     private_ip_address_allocation = "Dynamic"
+  }
+  tags = {
+    yor_trace = "8df9eb79-4137-41ec-b397-b360c0fe911b"
   }
 }
 
@@ -64,6 +73,9 @@ resource "azurerm_windows_virtual_machine" "example" {
     sku       = "2016-Datacenter"
     version   = "latest"
   }
+  tags = {
+    yor_trace = "24ad9fb3-2c52-4dac-8de6-619b6dae8696"
+  }
 }
 
 # Storage Account Resource
@@ -74,6 +86,9 @@ resource "azurerm_storage_account" "example" {
   location                 = azurerm_resource_group.example.location
   account_tier             = "Standard"
   account_replication_type = "GRS"
+  tags = {
+    yor_trace = "1bae5016-51f0-4e27-bd9a-f878cc99df3a"
+  }
 }
 
 # Role Assignment

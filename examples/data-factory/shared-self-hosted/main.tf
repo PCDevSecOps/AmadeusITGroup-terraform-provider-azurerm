@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "6a8215cb-b236-41db-8ef0-aeb9c226e68f"
+  }
 }
 
 resource "azurerm_virtual_network" "example" {
@@ -15,6 +18,9 @@ resource "azurerm_virtual_network" "example" {
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "13706bb5-0d61-4ad6-9c8f-a330cbf4a901"
+  }
 }
 
 resource "azurerm_subnet" "example" {
@@ -34,12 +40,18 @@ resource "azurerm_public_ip" "vm" {
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   allocation_method   = "Dynamic"
+  tags = {
+    yor_trace = "22f87e52-b239-444d-bb0e-59482ad4b76f"
+  }
 }
 
 resource "azurerm_network_security_group" "example" {
   name                = "${var.prefix}-NSG"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "54cfafe6-b61f-49d8-a6fb-02d235456bff"
+  }
 }
 
 resource "azurerm_network_security_rule" "RDPRule" {
@@ -81,6 +93,9 @@ resource "azurerm_network_interface" "example" {
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.vm.id
   }
+  tags = {
+    yor_trace = "f0ae5812-d2a5-46c8-8d7b-194af65bbe9c"
+  }
 }
 
 resource "azurerm_network_interface_security_group_association" "example" {
@@ -120,11 +135,17 @@ resource "azurerm_virtual_machine" "example" {
     provision_vm_agent        = true
     enable_automatic_upgrades = true
   }
+  tags = {
+    yor_trace = "836b81cc-d2d6-48ad-8d7a-499247060ef4"
+  }
 }
 
 resource "azurerm_mssql_virtual_machine" "example" {
   virtual_machine_id = azurerm_virtual_machine.example.id
   sql_license_type   = "PAYG"
+  tags = {
+    yor_trace = "d7ddb23f-89fd-4b33-a69f-96401953e221"
+  }
 }
 
 resource "azurerm_virtual_network" "test" {
@@ -132,6 +153,9 @@ resource "azurerm_virtual_network" "test" {
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "818c696f-0b75-4e25-8d1e-a746ce7ef026"
+  }
 }
 
 resource "azurerm_subnet" "test" {
@@ -146,6 +170,9 @@ resource "azurerm_public_ip" "test" {
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   allocation_method   = "Dynamic"
+  tags = {
+    yor_trace = "57efb435-9316-40a3-b4de-4985e8c2ba60"
+  }
 }
 
 resource "azurerm_network_interface" "test" {
@@ -158,6 +185,9 @@ resource "azurerm_network_interface" "test" {
     subnet_id                     = azurerm_subnet.test.id
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.test.id
+  }
+  tags = {
+    yor_trace = "e30b234c-f34f-4b93-a0db-1ea4905b72e8"
   }
 }
 
@@ -192,6 +222,9 @@ resource "azurerm_virtual_machine" "test" {
     timezone           = "Pacific Standard Time"
     provision_vm_agent = true
   }
+  tags = {
+    yor_trace = "8a21a20a-d745-4efd-ac0f-978606d6b388"
+  }
 }
 
 resource "azurerm_virtual_machine_extension" "test" {
@@ -204,17 +237,26 @@ resource "azurerm_virtual_machine_extension" "test" {
     "fileUris"         = ["https://raw.githubusercontent.com/Azure/azure-quickstart-templates/00b79d2102c88b56502a63041936ef4dd62cf725/101-vms-with-selfhost-integration-runtime/gatewayInstall.ps1"],
     "commandToExecute" = "powershell -ExecutionPolicy Unrestricted -File gatewayInstall.ps1 ${azurerm_data_factory_integration_runtime_self_hosted.host.primary_authorization_key} && timeout /t 120"
   })
+  tags = {
+    yor_trace = "489bd6af-258f-4ad4-ad32-c1db46dfdcc0"
+  }
 }
 
 resource "azurerm_resource_group" "host" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "276e2603-4ff8-4b80-b1cd-6cd668267767"
+  }
 }
 
 resource "azurerm_data_factory" "host" {
   name                = "${var.prefix}DFHOST"
   location            = azurerm_resource_group.host.location
   resource_group_name = azurerm_resource_group.host.name
+  tags = {
+    yor_trace = "a1335554-44d9-4f97-af2b-8f610d6f1090"
+  }
 }
 
 resource "azurerm_data_factory_integration_runtime_self_hosted" "host" {
@@ -225,6 +267,9 @@ resource "azurerm_data_factory_integration_runtime_self_hosted" "host" {
 resource "azurerm_resource_group" "target" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "9535342c-95b9-40a4-abe8-327e130cbfa7"
+  }
 }
 
 resource "azurerm_role_assignment" "target" {
@@ -240,6 +285,9 @@ resource "azurerm_data_factory" "target" {
 
   identity {
     type = "SystemAssigned"
+  }
+  tags = {
+    yor_trace = "e91a0935-1d5a-42a4-a6c6-71f3076a5ba7"
   }
 }
 

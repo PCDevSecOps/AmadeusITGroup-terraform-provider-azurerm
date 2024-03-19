@@ -15,6 +15,9 @@ resource "azurerm_network_interface" "example" {
     subnet_id                     = var.subnet_id
     private_ip_address_allocation = "Dynamic"
   }
+  tags = {
+    yor_trace = "91d6b648-8c36-4613-9c7e-d1bf8eba9421"
+  }
 }
 
 resource "azurerm_virtual_machine" "example" {
@@ -47,5 +50,8 @@ resource "azurerm_virtual_machine" "example" {
 
   os_profile_linux_config {
     disable_password_authentication = false
+  }
+  tags = {
+    yor_trace = "84ffe030-4e9b-423f-bf9f-cfcd48b47d3f"
   }
 }

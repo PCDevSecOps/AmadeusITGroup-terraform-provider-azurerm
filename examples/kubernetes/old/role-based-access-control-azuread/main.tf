@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-rbac-resources"
   location = var.location
+  tags = {
+    yor_trace = "44bef2a8-21bb-4a4a-afd3-da34f2770e00"
+  }
 }
 
 resource "azurerm_kubernetes_cluster" "example" {
@@ -44,5 +47,6 @@ resource "azurerm_kubernetes_cluster" "example" {
 
   tags = {
     Environment = "Production"
+    yor_trace   = "3fc13128-57f4-4342-814f-2493fdce6f1c"
   }
 }

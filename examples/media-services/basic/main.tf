@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "7087c127-3a27-4394-98db-66e4deccedaf"
+  }
 }
 
 resource "azurerm_storage_account" "example" {
@@ -19,6 +22,7 @@ resource "azurerm_storage_account" "example" {
 
   tags = {
     environment = "staging"
+    yor_trace   = "e9dfce87-e3aa-454e-9734-715f250c6825"
   }
 }
 
@@ -30,6 +34,9 @@ resource "azurerm_media_services_account" "example" {
   storage_account {
     id         = azurerm_storage_account.example.id
     is_primary = true
+  }
+  tags = {
+    yor_trace = "4d745625-ef76-478e-ae13-ce16d80847c5"
   }
 }
 

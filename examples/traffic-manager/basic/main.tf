@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "babd1955-8b90-4052-9625-2c731a4673a6"
+  }
 }
 
 resource "azurerm_traffic_manager_profile" "example" {
@@ -27,5 +30,8 @@ resource "azurerm_traffic_manager_profile" "example" {
     interval_in_seconds          = 30
     timeout_in_seconds           = 9
     tolerated_number_of_failures = 3
+  }
+  tags = {
+    yor_trace = "79f50452-6276-4216-9351-9f42d0888737"
   }
 }

@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "0b53b476-4e63-4ba8-bfa8-71e5804d3afe"
+  }
 }
 
 resource "azurerm_storage_account" "example" {
@@ -20,5 +23,8 @@ resource "azurerm_storage_account" "example" {
   network_rules {
     default_action = "Deny"
     ip_rules       = ["23.45.1.0/30"]
+  }
+  tags = {
+    yor_trace = "1fae1641-80ec-4c7a-a5fd-abf11102a0ad"
   }
 }

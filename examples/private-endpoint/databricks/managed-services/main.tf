@@ -15,6 +15,9 @@ data "azurerm_databricks_workspace_private_endpoint_connection" "example" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-databricks-private-endpoint-ms-dbfscmk"
   location = "eastus2"
+  tags = {
+    yor_trace = "e0eaf767-cb58-48b4-b2a0-65eee5a5010a"
+  }
 }
 
 resource "azurerm_virtual_network" "example" {
@@ -22,6 +25,9 @@ resource "azurerm_virtual_network" "example" {
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "c6e904ae-0e4c-424d-baf4-11aa11d03365"
+  }
 }
 
 resource "azurerm_subnet" "public" {
@@ -87,6 +93,9 @@ resource "azurerm_network_security_group" "example" {
   name                = "${var.prefix}-nsg-databricks"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "75716593-4613-4ef7-b407-d86e4173b366"
+  }
 }
 
 resource "azurerm_databricks_workspace" "example" {
@@ -114,6 +123,7 @@ resource "azurerm_databricks_workspace" "example" {
   tags = {
     Environment = "Production"
     Pricing     = "Premium"
+    yor_trace   = "a6f4ddda-ea09-4cc8-a4ba-4dce86d2a360"
   }
 }
 
@@ -138,6 +148,9 @@ resource "azurerm_private_endpoint" "databricks" {
     private_connection_resource_id = azurerm_databricks_workspace.example.id
     subresource_names              = ["databricks_ui_api"]
   }
+  tags = {
+    yor_trace = "de7a5488-4db3-45ce-9bfe-5b83ab635228"
+  }
 }
 
 resource "azurerm_private_dns_zone" "example" {
@@ -145,6 +158,9 @@ resource "azurerm_private_dns_zone" "example" {
 
   name                = "privatelink.azuredatabricks.net"
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "fb93bc2c-8190-4d89-b0ec-0e37fa9e7d40"
+  }
 }
 
 resource "azurerm_private_dns_cname_record" "example" {
@@ -153,6 +169,9 @@ resource "azurerm_private_dns_cname_record" "example" {
   resource_group_name = azurerm_resource_group.example.name
   ttl                 = 300
   record              = "eastus2-c2.azuredatabricks.net"
+  tags = {
+    yor_trace = "0b627e44-564f-48f7-91f6-df7458705feb"
+  }
 }
 
 resource "azurerm_key_vault" "example" {
@@ -163,6 +182,9 @@ resource "azurerm_key_vault" "example" {
   sku_name            = "premium"
 
   soft_delete_retention_days = 7
+  tags = {
+    yor_trace = "cfea9679-acd7-49c4-85a4-809a94df6075"
+  }
 }
 
 resource "azurerm_key_vault_key" "example" {
@@ -181,6 +203,9 @@ resource "azurerm_key_vault_key" "example" {
     "verify",
     "wrapKey",
   ]
+  tags = {
+    yor_trace = "d2e8e984-c67a-4170-a688-45d7c6e2ab04"
+  }
 }
 
 resource "azurerm_key_vault_access_policy" "terraform" {

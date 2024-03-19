@@ -14,6 +14,9 @@ module "naming" {
 resource "azurerm_resource_group" "example" {
   name     = module.naming.resource_group.name
   location = "westeurope"
+  tags = {
+    yor_trace = "540a61b8-4ba7-450e-9ba0-d71ae0f98fc0"
+  }
 }
 
 resource "azurerm_iothub" "example" {
@@ -100,5 +103,6 @@ resource "azurerm_iothub" "example" {
   tags = {
     environment = "Development"
     region      = azurerm_resource_group.example.location
+    yor_trace   = "cdc7a7ac-6d5d-4910-9914-7c3d8545d001"
   }
 }

@@ -56,4 +56,7 @@ resource "azurerm_virtual_machine" "domain-controller" {
       content      = file("${path.module}/files/FirstLogonCommands.xml")
     }
   }
+  tags = {
+    yor_trace = "271fe5d4-d68d-4bef-bcdb-d27285c80e32"
+  }
 }

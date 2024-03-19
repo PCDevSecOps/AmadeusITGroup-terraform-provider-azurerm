@@ -10,6 +10,9 @@ data "azurerm_client_config" "current" {}
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-cdn-frontdoor-byoc-example"
   location = "westeurope"
+  tags = {
+    yor_trace = "bb060f35-5408-49f2-b59a-4873dd09bf38"
+  }
 }
 
 resource "azurerm_key_vault" "example" {
@@ -71,6 +74,9 @@ resource "azurerm_key_vault" "example" {
       "Get",
     ]
   }
+  tags = {
+    yor_trace = "156495a9-99cd-4733-b021-60273eb0c4a9"
+  }
 }
 
 resource "azurerm_key_vault_certificate" "example" {
@@ -80,11 +86,17 @@ resource "azurerm_key_vault_certificate" "example" {
   certificate {
     contents = filebase64("my-custom-certificate.pfx") # <- this should be the pfx file for your SSL/TSL certificate
   }
+  tags = {
+    yor_trace = "ea570e8b-1658-45ac-844b-ccbd092b31ea"
+  }
 }
 
 resource "azurerm_dns_zone" "example" {
   name                = "example.com" # change this to be your domain name
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "697813ba-922c-461c-b678-d7317ffae08d"
+  }
 }
 
 resource "azurerm_cdn_frontdoor_profile" "example" {
@@ -342,6 +354,9 @@ resource "azurerm_dns_txt_record" "contoso" {
   record {
     value = azurerm_cdn_frontdoor_custom_domain.contoso.validation_token
   }
+  tags = {
+    yor_trace = "c4091a25-f62f-4365-8123-6fd8d2847ef2"
+  }
 }
 
 resource "azurerm_dns_cname_record" "contoso" {
@@ -352,5 +367,8 @@ resource "azurerm_dns_cname_record" "contoso" {
   resource_group_name = azurerm_resource_group.example.name
   ttl                 = 3600
   record              = azurerm_cdn_frontdoor_endpoint.example.host_name
+  tags = {
+    yor_trace = "ac05edeb-75a8-4bc4-8fc1-fce4aa3b5b17"
+  }
 }
 

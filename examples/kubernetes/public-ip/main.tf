@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-aks-resources"
   location = var.location
+  tags = {
+    yor_trace = "e91f0e97-31e6-477e-94d5-98f8a2c96d67"
+  }
 }
 
 resource "azurerm_virtual_network" "example" {
@@ -15,6 +18,9 @@ resource "azurerm_virtual_network" "example" {
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   address_space       = ["192.168.0.0/16"]
+  tags = {
+    yor_trace = "749a1230-a192-4dfa-88be-d4b5b0778dbd"
+  }
 }
 
 resource "azurerm_subnet" "example" {
@@ -45,6 +51,9 @@ resource "azurerm_kubernetes_cluster" "example" {
   network_profile {
     network_plugin    = "kubenet"
     load_balancer_sku = "standard"
+  }
+  tags = {
+    yor_trace = "ac876feb-9dbd-419e-8d58-2e0cd0c9b1c0"
   }
 }
 

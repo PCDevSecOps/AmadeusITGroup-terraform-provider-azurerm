@@ -6,6 +6,9 @@ resource "azurerm_public_ip" "example" {
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   allocation_method   = "Static"
+  tags = {
+    yor_trace = "cbd207d9-75a9-47da-804f-0c299dac4ed5"
+  }
 }
 
 locals {
@@ -20,6 +23,9 @@ resource "azurerm_lb" "example" {
   frontend_ip_configuration {
     name                 = local.frontend_ip_configuration_name
     public_ip_address_id = azurerm_public_ip.example.id
+  }
+  tags = {
+    yor_trace = "57a8665a-b239-49ef-ac20-8ba55979861f"
   }
 }
 

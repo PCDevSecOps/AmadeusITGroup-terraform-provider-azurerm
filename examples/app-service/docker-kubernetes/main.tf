@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "main" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "ccbfcac2-709c-4603-8863-5186dc8317b2"
+  }
 }
 
 resource "azurerm_app_service_plan" "main" {
@@ -20,6 +23,9 @@ resource "azurerm_app_service_plan" "main" {
   sku {
     tier = "Standard"
     size = "S1"
+  }
+  tags = {
+    yor_trace = "be84dfd1-310e-41c5-9f87-7457edf72fb9"
   }
 }
 
@@ -36,5 +42,8 @@ resource "azurerm_app_service" "main" {
 
   app_settings = {
     "WEBSITES_ENABLE_APP_SERVICE_STORAGE" = "false"
+  }
+  tags = {
+    yor_trace = "8c1af2f4-4b6d-40ee-8c98-5fbd3739dfbc"
   }
 }

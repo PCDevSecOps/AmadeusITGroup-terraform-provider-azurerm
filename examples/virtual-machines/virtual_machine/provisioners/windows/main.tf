@@ -89,4 +89,7 @@ resource "azurerm_virtual_machine" "example" {
       "dir",
     ]
   }
+  tags = {
+    yor_trace = "589a7942-2913-4d06-b53c-05e270cb0eb5"
+  }
 }

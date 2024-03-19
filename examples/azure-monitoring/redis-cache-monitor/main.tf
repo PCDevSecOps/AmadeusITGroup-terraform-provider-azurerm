@@ -10,6 +10,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "main" {
   name     = "example_rg_rediscache"
   location = "east us"
+  tags = {
+    yor_trace = "b666141f-e45d-447b-930e-daf0ef198d26"
+  }
 }
 
 resource "azurerm_monitor_action_group" "main" {
@@ -26,6 +29,9 @@ resource "azurerm_monitor_action_group" "main" {
   webhook_receiver {
     name        = "callmyapi"
     service_uri = "http://example.com/alert"
+  }
+  tags = {
+    yor_trace = "7bf38493-6697-40a4-903c-6990b3f6b160"
   }
 }
 
@@ -50,6 +56,9 @@ resource "azurerm_monitor_metric_alert" "cache_hit_alert" {
   action {
     action_group_id = azurerm_monitor_action_group.main.id
   }
+  tags = {
+    yor_trace = "6c317ae8-6940-4e7b-9ea9-ae9b45b71629"
+  }
 }
 
 
@@ -73,6 +82,9 @@ resource "azurerm_monitor_metric_alert" "cache_miss_alert" {
   action {
     action_group_id = azurerm_monitor_action_group.main.id
   }
+  tags = {
+    yor_trace = "7f884ab0-57ca-4e71-9130-c370592a545f"
+  }
 }
 
 ### Cache Connection Alert
@@ -94,6 +106,9 @@ resource "azurerm_monitor_metric_alert" "cache_connected_clients" {
 
   action {
     action_group_id = azurerm_monitor_action_group.main.id
+  }
+  tags = {
+    yor_trace = "bcdaa0eb-8ce0-4599-8a63-46f279fa298f"
   }
 }
 
@@ -117,5 +132,8 @@ resource "azurerm_monitor_metric_alert" "cache_cpu" {
 
   action {
     action_group_id = azurerm_monitor_action_group.main.id
+  }
+  tags = {
+    yor_trace = "dfd6813d-b18a-45c3-90cc-14cfa7a61ed7"
   }
 }

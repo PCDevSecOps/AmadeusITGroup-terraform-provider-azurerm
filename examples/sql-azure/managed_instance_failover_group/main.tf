@@ -20,6 +20,9 @@ variable "location_secondary" {
 resource "azurerm_resource_group" "primary" {
   name     = "${var.prefix}-primary-resources"
   location = var.location
+  tags = {
+    yor_trace = "64d3be2b-9d5a-43e5-b0e6-3e6015eca38c"
+  }
 }
 
 module "primary" {
@@ -33,6 +36,9 @@ module "primary" {
 resource "azurerm_resource_group" "secondary" {
   name     = "${var.prefix}-secondary-resources"
   location = var.location_secondary
+  tags = {
+    yor_trace = "03f2bfc6-ec5e-4821-9632-8cc1d3266532"
+  }
 }
 
 module "secondary" {

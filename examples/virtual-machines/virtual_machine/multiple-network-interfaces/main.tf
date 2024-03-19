@@ -12,6 +12,9 @@ locals {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "ac732f3a-babb-467c-b5a7-ec82cdabc06e"
+  }
 }
 
 resource "azurerm_virtual_network" "example" {
@@ -19,6 +22,9 @@ resource "azurerm_virtual_network" "example" {
   address_space       = ["172.16.0.0/16"]
   resource_group_name = azurerm_resource_group.example.name
   location            = azurerm_resource_group.example.location
+  tags = {
+    yor_trace = "08136224-620d-4af5-a275-dc977eac9a5c"
+  }
 }
 
 resource "azurerm_subnet" "external" {
@@ -40,6 +46,9 @@ resource "azurerm_public_ip" "example" {
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   allocation_method   = "Dynamic"
+  tags = {
+    yor_trace = "8fc97da0-b10c-4dcc-91ab-b389d5fd189d"
+  }
 }
 
 resource "azurerm_network_security_group" "example" {
@@ -72,6 +81,9 @@ resource "azurerm_network_security_group" "example" {
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
+  tags = {
+    yor_trace = "c5709e3b-2238-4dcf-b31f-2c093af0b2fc"
+  }
 }
 
 resource "azurerm_network_interface" "external" {
@@ -86,6 +98,9 @@ resource "azurerm_network_interface" "external" {
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.example.id
   }
+  tags = {
+    yor_trace = "b0ffb66d-6668-4f71-b611-56f3c47a3e49"
+  }
 }
 
 resource "azurerm_network_interface" "internal" {
@@ -97,6 +112,9 @@ resource "azurerm_network_interface" "internal" {
     name                          = "primary"
     subnet_id                     = azurerm_subnet.internal.id
     private_ip_address_allocation = "Dynamic"
+  }
+  tags = {
+    yor_trace = "d49eb339-bf0e-430c-a67d-211ea1dd5e86"
   }
 }
 
@@ -131,5 +149,8 @@ resource "azurerm_virtual_machine" "main" {
 
   os_profile_linux_config {
     disable_password_authentication = false
+  }
+  tags = {
+    yor_trace = "e9c8e69a-2c15-4cb1-aeba-af5e5639194e"
   }
 }

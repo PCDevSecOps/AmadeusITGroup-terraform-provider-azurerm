@@ -15,6 +15,9 @@ data "azurerm_client_config" "current" {}
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-rg"
   location = var.location
+  tags = {
+    yor_trace = "d4ba9fa8-29cb-4a57-8096-86ae1309e365"
+  }
 }
 
 resource "azurerm_virtual_network" "example" {
@@ -22,6 +25,9 @@ resource "azurerm_virtual_network" "example" {
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "6d70975e-81ec-4a10-a0cc-af67dbf42885"
+  }
 }
 
 resource "azurerm_subnet" "example" {
@@ -36,6 +42,9 @@ resource "azurerm_public_ip" "example" {
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   allocation_method   = "Static"
+  tags = {
+    yor_trace = "1810923d-3f63-46ae-87cd-f947682a6581"
+  }
 }
 
 resource "azurerm_network_interface" "example" {
@@ -47,6 +56,9 @@ resource "azurerm_network_interface" "example" {
     subnet_id                     = azurerm_subnet.example.id
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.example.id
+  }
+  tags = {
+    yor_trace = "e93a160b-e75b-4a80-8f48-daa3370eb834"
   }
 }
 
@@ -64,6 +76,9 @@ resource "azurerm_network_security_group" "example" {
     destination_port_range     = "22"
     source_address_prefix      = "*"
     destination_address_prefix = "*"
+  }
+  tags = {
+    yor_trace = "49f48932-c301-4808-bc4c-49082263fe6e"
   }
 }
 
@@ -94,6 +109,9 @@ resource "azurerm_linux_virtual_machine" "example" {
     offer     = "0001-com-ubuntu-server-jammy"
     sku       = "22_04-lts"
     version   = "latest"
+  }
+  tags = {
+    yor_trace = "0665850e-a906-424f-83ac-b91c01d6737e"
   }
 }
 

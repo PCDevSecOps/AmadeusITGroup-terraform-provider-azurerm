@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "173405d9-8c34-46a6-85dd-db18200d16e5"
+  }
 }
 
 resource "azurerm_virtual_network" "example" {
@@ -15,6 +18,9 @@ resource "azurerm_virtual_network" "example" {
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "a29c6200-f3ec-46ef-853e-6973e5aea5bf"
+  }
 }
 
 resource "azurerm_subnet" "example" {
@@ -34,12 +40,18 @@ resource "azurerm_public_ip" "vm" {
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   allocation_method   = "Dynamic"
+  tags = {
+    yor_trace = "af3e36bb-4d5d-455e-a442-f6a57a4ed755"
+  }
 }
 
 resource "azurerm_network_security_group" "example" {
   name                = "${var.prefix}-NSG"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "8121b0c4-ced9-4ba1-bd08-96aee630b560"
+  }
 }
 
 resource "azurerm_network_security_rule" "RDPRule" {
@@ -81,6 +93,9 @@ resource "azurerm_network_interface" "example" {
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.vm.id
   }
+  tags = {
+    yor_trace = "61a2e3de-7db5-4b8b-b5aa-df071904ffdb"
+  }
 }
 
 resource "azurerm_network_interface_security_group_association" "example" {
@@ -120,9 +135,15 @@ resource "azurerm_virtual_machine" "example" {
     provision_vm_agent        = true
     enable_automatic_upgrades = true
   }
+  tags = {
+    yor_trace = "747ce1dd-f73d-482c-b24c-68f36a8fd128"
+  }
 }
 
 resource "azurerm_mssql_virtual_machine" "example" {
   virtual_machine_id = azurerm_virtual_machine.example.id
   sql_license_type   = "PAYG"
+  tags = {
+    yor_trace = "3420be73-20ae-49fe-b090-ed42e20118f4"
+  }
 }

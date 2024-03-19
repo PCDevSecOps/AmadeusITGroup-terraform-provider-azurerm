@@ -9,6 +9,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "azurg" {
   name     = "rgAzureFirewall"
   location = "East US"
+  tags = {
+    yor_trace = "ea410f2e-d0fe-42f1-8cc0-af184d4c6205"
+  }
 }
 
 # generate a random prefix
@@ -31,6 +34,7 @@ resource "azurerm_storage_account" "azusa" {
     environment = "Staging"
     owner       = "Someone@contoso.com"
     costcenter  = "IT"
+    yor_trace   = "c3979fe7-e82d-44ed-a3e2-fa3061c91686"
   }
 }
 
@@ -52,6 +56,7 @@ resource "azurerm_route_table" "azurt" {
     environment = "Staging"
     owner       = "Someone@contoso.com"
     costcenter  = "IT"
+    yor_trace   = "5b852ba1-cddf-407f-840b-07e4a59817b8"
   }
 }
 
@@ -67,6 +72,7 @@ resource "azurerm_virtual_network" "azuvnet" {
     environment = "Staging"
     owner       = "Someone@contoso.com"
     costcenter  = "IT"
+    yor_trace   = "fea0c6a3-4977-4522-8b15-a66d0f60f822"
   }
 }
 
@@ -109,6 +115,7 @@ resource "azurerm_public_ip" "azufwpip" {
     environment = "Staging"
     owner       = "Someone@contoso.com"
     costcenter  = "IT"
+    yor_trace   = "162c484c-59e8-4ef8-b110-796d03d428ed"
   }
 }
 
@@ -124,6 +131,7 @@ resource "azurerm_public_ip" "azujumppip" {
     environment = "Staging"
     owner       = "Someone@contoso.com"
     costcenter  = "IT"
+    yor_trace   = "13d366bd-08f9-4d2c-a839-53ff6e346678"
   }
 }
 
@@ -149,6 +157,7 @@ resource "azurerm_network_security_group" "azunsgjb" {
     environment = "Staging"
     owner       = "Someone@contoso.com"
     costcenter  = "IT"
+    yor_trace   = "c4bd80e6-1da5-41ae-b6e0-ac7a3b1a7c85"
   }
 }
 
@@ -169,6 +178,7 @@ resource "azurerm_network_interface" "azunicjb" {
     environment = "Staging"
     owner       = "Someone@contoso.com"
     costcenter  = "IT"
+    yor_trace   = "b95dc8bf-4566-4e2a-8f60-e958492a404a"
   }
 }
 
@@ -193,6 +203,7 @@ resource "azurerm_network_interface" "azunicvm" {
     environment = "Staging"
     owner       = "Someone@contoso.com"
     costcenter  = "IT"
+    yor_trace   = "6c2c6c39-d1f6-4406-b633-c8f75d6d8d23"
   }
 }
 
@@ -232,6 +243,7 @@ resource "azurerm_virtual_machine" "vmjb" {
     environment = "Staging"
     owner       = "Someone@contoso.com"
     costcenter  = "IT"
+    yor_trace   = "9343b859-b56e-4f4f-8faf-3cc13644a6cb"
   }
 
   depends_on = [azurerm_network_interface_security_group_association.azunicjb]
@@ -273,6 +285,7 @@ resource "azurerm_virtual_machine" "vmserver" {
     environment = "Staging"
     owner       = "Someone@contoso.com"
     costcenter  = "IT"
+    yor_trace   = "efb949c5-6a3a-4540-8a72-4985e911477a"
   }
 }
 
@@ -288,6 +301,9 @@ resource "azurerm_firewall" "azufw" {
     name                 = "configuration"
     subnet_id            = azurerm_subnet.azusubnetfw.id
     public_ip_address_id = azurerm_public_ip.azufwpip.id
+  }
+  tags = {
+    yor_trace = "28864361-6928-4859-af21-89a8075c4e46"
   }
 }
 

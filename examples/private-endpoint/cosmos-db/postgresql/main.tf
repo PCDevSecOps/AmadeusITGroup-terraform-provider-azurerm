@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "b21b3400-9911-4866-8112-e28771322458"
+  }
 }
 
 resource "azurerm_virtual_network" "example" {
@@ -15,6 +18,9 @@ resource "azurerm_virtual_network" "example" {
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "816efaae-f297-4aea-b1b7-802e1a6ee750"
+  }
 }
 
 resource "azurerm_subnet" "endpoint" {
@@ -47,5 +53,8 @@ resource "azurerm_private_endpoint" "example" {
     is_manual_connection           = false
     private_connection_resource_id = azurerm_cosmosdb_postgresql_cluster.example.id
     subresource_names              = ["coordinator"]
+  }
+  tags = {
+    yor_trace = "0a68c9ba-ea11-4ef9-afba-70426b914f97"
   }
 }
