@@ -10,6 +10,9 @@ locals {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "7ad873eb-77dc-4afe-b4fb-dca8fcaef6e4"
+  }
 }
 
 resource "azurerm_virtual_network" "example" {
@@ -17,6 +20,9 @@ resource "azurerm_virtual_network" "example" {
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "f439639b-4306-4e8b-9203-b839bfb76042"
+  }
 }
 
 resource "azurerm_subnet" "example" {
@@ -31,6 +37,9 @@ resource "azurerm_public_ip" "example" {
   resource_group_name = azurerm_resource_group.example.name
   location            = azurerm_resource_group.example.location
   allocation_method   = "Static"
+  tags = {
+    yor_trace = "4fb791aa-5bb1-426b-82f6-4d64dc4abffa"
+  }
 }
 
 resource "azurerm_network_interface" "example" {
@@ -43,5 +52,8 @@ resource "azurerm_network_interface" "example" {
     subnet_id                     = azurerm_subnet.example.id
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.example.id
+  }
+  tags = {
+    yor_trace = "72b01bd3-6514-4ff3-a8ff-99c02e38f2d5"
   }
 }

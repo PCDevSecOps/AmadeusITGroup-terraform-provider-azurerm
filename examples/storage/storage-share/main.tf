@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "a7e841c0-fc55-4831-b7ef-f7bb56c7c0e2"
+  }
 }
 
 resource "azurerm_storage_account" "example" {
@@ -17,6 +20,9 @@ resource "azurerm_storage_account" "example" {
   account_tier             = "Premium"
   account_replication_type = "LRS"
   account_kind             = "FileStorage"
+  tags = {
+    yor_trace = "f410c65b-3718-47fe-a850-32ec38225686"
+  }
 }
 
 resource "azurerm_storage_share" "example" {

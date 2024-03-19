@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "3ef501f5-a037-4f5b-b503-e044301e09b8"
+  }
 }
 
 resource "azurerm_virtual_network" "example" {
@@ -15,6 +18,9 @@ resource "azurerm_virtual_network" "example" {
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "17e936ab-856f-48ab-a4aa-8d1353d7659a"
+  }
 }
 
 resource "azurerm_subnet" "gateway" {
@@ -41,6 +47,9 @@ resource "azurerm_public_ip" "example" {
   resource_group_name = azurerm_resource_group.example.name
   allocation_method   = "Static"
   sku                 = "Standard"
+  tags = {
+    yor_trace = "d5b6d3e8-2ac7-455c-ab79-8548c58222b0"
+  }
 }
 
 locals {
@@ -119,6 +128,9 @@ resource "azurerm_application_gateway" "example" {
     backend_http_settings_name = "settings"
     priority                   = 100
   }
+  tags = {
+    yor_trace = "1dcc2578-0034-4c43-8fdf-e5f3a16c974d"
+  }
 }
 
 resource "azurerm_private_endpoint" "example" {
@@ -134,5 +146,8 @@ resource "azurerm_private_endpoint" "example" {
     subresource_names = [
       local.private_frontend_ip_configuration_name,
     ]
+  }
+  tags = {
+    yor_trace = "e4b20d6f-26e8-4b9c-9813-dab3ac232e98"
   }
 }

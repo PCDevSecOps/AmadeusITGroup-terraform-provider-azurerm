@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "efb52407-8bcd-4d2b-882e-fd98446cc72a"
+  }
 }
 
 resource "azurerm_virtual_network" "example" {
@@ -15,6 +18,9 @@ resource "azurerm_virtual_network" "example" {
   resource_group_name = azurerm_resource_group.example.name
   location            = azurerm_resource_group.example.location
   address_space       = ["10.0.0.0/16"]
+  tags = {
+    yor_trace = "7ce2691f-2fae-41d9-81c4-156712aa9bb0"
+  }
 }
 
 resource "azurerm_subnet" "example" {
@@ -28,6 +34,9 @@ resource "azurerm_network_security_group" "example" {
   name                = "${var.prefix}-nsg"
   resource_group_name = azurerm_resource_group.example.name
   location            = azurerm_resource_group.example.location
+  tags = {
+    yor_trace = "f8ca0ce8-d437-4767-bb17-b236cff66b07"
+  }
 }
 
 # NOTE: this allows SSH from any network

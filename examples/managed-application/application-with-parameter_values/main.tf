@@ -14,6 +14,9 @@ data "azurerm_role_definition" "builtin" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "a3f95fc7-cad2-4ecf-8ac5-ecdab03722e5"
+  }
 }
 
 resource "azurerm_managed_application_definition" "example" {
@@ -92,6 +95,9 @@ resource "azurerm_managed_application_definition" "example" {
     service_principal_id = data.azurerm_client_config.current.object_id
     role_definition_id   = split("/", data.azurerm_role_definition.builtin.id)[length(split("/", data.azurerm_role_definition.builtin.id)) - 1]
   }
+  tags = {
+    yor_trace = "8bb0d85b-b6c0-4de4-9e9a-c964b02aaa72"
+  }
 }
 
 
@@ -126,4 +132,7 @@ resource "azurerm_managed_application" "test" {
       }
     }
   })
+  tags = {
+    yor_trace = "9d1928a7-2a40-4399-9bb5-75169796a79b"
+  }
 }

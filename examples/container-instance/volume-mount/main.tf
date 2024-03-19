@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "69140dc5-36c3-4d75-b25d-35dc2680c207"
+  }
 }
 
 resource "azurerm_storage_account" "example" {
@@ -16,6 +19,9 @@ resource "azurerm_storage_account" "example" {
   location                 = azurerm_resource_group.example.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
+  tags = {
+    yor_trace = "75e5f1de-601a-43e7-a6a1-b68f88738c18"
+  }
 }
 
 resource "azurerm_storage_share" "example" {
@@ -56,5 +62,6 @@ resource "azurerm_container_group" "example" {
 
   tags = {
     environment = "testing"
+    yor_trace   = "5398896f-f0c0-4ffc-b150-3045f12cfd4c"
   }
 }

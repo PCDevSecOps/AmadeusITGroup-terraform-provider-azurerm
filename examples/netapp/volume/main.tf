@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "ba3a49d3-d3d7-460f-83ae-2c85698e094d"
+  }
 }
 
 resource "azurerm_virtual_network" "example" {
@@ -15,6 +18,9 @@ resource "azurerm_virtual_network" "example" {
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   address_space       = ["10.0.0.0/16"]
+  tags = {
+    yor_trace = "2e4e8131-534d-459e-bd30-f3afb9e6aa7d"
+  }
 }
 
 resource "azurerm_subnet" "example" {
@@ -37,6 +43,9 @@ resource "azurerm_netapp_account" "example" {
   name                = "${var.prefix}-netappaccount"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "6dd03a0e-888e-432f-a7dd-8d6a76c3deb4"
+  }
 }
 
 resource "azurerm_netapp_pool" "example" {
@@ -46,6 +55,9 @@ resource "azurerm_netapp_pool" "example" {
   account_name        = azurerm_netapp_account.example.name
   service_level       = "Premium"
   size_in_tb          = 4
+  tags = {
+    yor_trace = "51ac03a6-ada1-4528-8ed1-6d509ff03c58"
+  }
 }
 
 resource "azurerm_netapp_volume" "example" {
@@ -70,5 +82,8 @@ resource "azurerm_netapp_volume" "example" {
     protocols_enabled = ["NFSv4.1"]
     unix_read_only    = false
     unix_read_write   = true
+  }
+  tags = {
+    yor_trace = "3909ae72-19c5-48dd-acdb-24387c79ec66"
   }
 }

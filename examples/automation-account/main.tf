@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "b838b097-a030-4a9d-b7c7-f7993b50d5d2"
+  }
 }
 
 resource "azurerm_automation_account" "example" {
@@ -17,6 +20,9 @@ resource "azurerm_automation_account" "example" {
 
   sku {
     name = "Basic"
+  }
+  tags = {
+    yor_trace = "dc78f73c-68dd-42b0-b866-09515671ca20"
   }
 }
 
@@ -32,6 +38,9 @@ resource "azurerm_automation_runbook" "example" {
 
   publish_content_link {
     uri = "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/c4935ffb69246a6058eb24f54640f53f69d3ac9f/101-automation-runbook-getvms/Runbooks/Get-AzureVMTutorial.ps1"
+  }
+  tags = {
+    yor_trace = "ddf90515-02b9-404b-8840-596e963bc0b7"
   }
 }
 

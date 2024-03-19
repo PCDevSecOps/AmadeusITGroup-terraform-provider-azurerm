@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "c05973c5-4197-455b-a6e0-a377bb3cc14e"
+  }
 }
 
 resource "azurerm_mssql_server" "example" {
@@ -17,11 +20,17 @@ resource "azurerm_mssql_server" "example" {
   version                      = "12.0"
   administrator_login          = "mradministrator"
   administrator_login_password = "thisIsDog11"
+  tags = {
+    yor_trace = "4fee5496-949f-4f22-a41d-56e0e68e3c39"
+  }
 }
 
 resource "azurerm_mssql_database" "example" {
   name      = "${var.prefix}-db-primary"
   server_id = azurerm_mssql_server.example.id
+  tags = {
+    yor_trace = "a2178141-0b00-471a-9f05-63875f2f111f"
+  }
 }
 
 resource "azurerm_eventhub_namespace" "example" {
@@ -29,6 +38,9 @@ resource "azurerm_eventhub_namespace" "example" {
   location            = var.location
   resource_group_name = azurerm_resource_group.example.name
   sku                 = "Standard"
+  tags = {
+    yor_trace = "4489c811-92ff-4f57-8f7a-bad74c809a2e"
+  }
 }
 
 resource "azurerm_eventhub" "example" {

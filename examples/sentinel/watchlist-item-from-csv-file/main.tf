@@ -10,6 +10,9 @@ provider "random" {}
 resource "azurerm_resource_group" "example" {
   name     = "example-rg"
   location = "West Europe"
+  tags = {
+    yor_trace = "141d96b8-23a3-4a86-beed-f08a33c44174"
+  }
 }
 
 resource "azurerm_log_analytics_workspace" "example" {
@@ -17,6 +20,9 @@ resource "azurerm_log_analytics_workspace" "example" {
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   sku                 = "PerGB2018"
+  tags = {
+    yor_trace = "b32aa86e-52f9-49a7-bbf0-55479a619837"
+  }
 }
 
 resource "azurerm_log_analytics_solution" "example" {
@@ -28,6 +34,9 @@ resource "azurerm_log_analytics_solution" "example" {
   plan {
     publisher = "Microsoft"
     product   = "OMSGallery/SecurityInsights"
+  }
+  tags = {
+    yor_trace = "9fac8568-ba86-4b90-a183-d17999f714da"
   }
 }
 

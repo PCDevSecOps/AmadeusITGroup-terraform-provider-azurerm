@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "rg" {
   name     = var.resource_group
   location = var.location
+  tags = {
+    yor_trace = "22c7340b-77e7-4739-8192-2638bb8297c1"
+  }
 }
 
 resource "azurerm_storage_account" "stor" {
@@ -16,6 +19,9 @@ resource "azurerm_storage_account" "stor" {
   resource_group_name      = azurerm_resource_group.rg.name
   account_tier             = var.storage_account_tier
   account_replication_type = var.storage_replication_type
+  tags = {
+    yor_trace = "9be2d965-4f3b-4763-a290-01cf6e32d6f4"
+  }
 }
 
 resource "azurerm_availability_set" "avset" {
@@ -25,6 +31,9 @@ resource "azurerm_availability_set" "avset" {
   platform_fault_domain_count  = 2
   platform_update_domain_count = 2
   managed                      = true
+  tags = {
+    yor_trace = "a4c690bf-4393-4425-9c25-b675cfeebb9f"
+  }
 }
 
 resource "azurerm_public_ip" "lbpip" {
@@ -33,6 +42,9 @@ resource "azurerm_public_ip" "lbpip" {
   resource_group_name = azurerm_resource_group.rg.name
   allocation_method   = "Dynamic"
   domain_name_label   = var.lb_ip_dns_name
+  tags = {
+    yor_trace = "1abebdab-d9ed-4628-a6dd-f70dc88d2a08"
+  }
 }
 
 resource "azurerm_virtual_network" "vnet" {
@@ -40,6 +52,9 @@ resource "azurerm_virtual_network" "vnet" {
   location            = var.location
   address_space       = ["${var.address_space}"]
   resource_group_name = azurerm_resource_group.rg.name
+  tags = {
+    yor_trace = "c18f2949-fcf3-4349-8b0b-38446107522f"
+  }
 }
 
 resource "azurerm_subnet" "subnet" {
@@ -57,6 +72,9 @@ resource "azurerm_lb" "lb" {
   frontend_ip_configuration {
     name                 = "LoadBalancerFrontEnd"
     public_ip_address_id = azurerm_public_ip.lbpip.id
+  }
+  tags = {
+    yor_trace = "d9d17f13-aeda-4ced-87cc-8d6f787f9119"
   }
 }
 
@@ -113,6 +131,9 @@ resource "azurerm_network_interface" "nic" {
     subnet_id                     = azurerm_subnet.subnet.id
     private_ip_address_allocation = "Dynamic"
   }
+  tags = {
+    yor_trace = "1d816f64-cc58-45b6-9ecc-4f0f6179aa53"
+  }
 }
 
 
@@ -152,4 +173,7 @@ resource "azurerm_virtual_machine" "vm" {
   }
 
   os_profile_windows_config {}
+  tags = {
+    yor_trace = "6c2fb703-bef6-4175-af4e-a94d2c018978"
+  }
 }

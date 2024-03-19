@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "d8f30c6c-9b50-418e-b4b7-8b3b9e488bb8"
+  }
 }
 
 module "virtual-network" {
@@ -44,6 +47,9 @@ resource "azurerm_traffic_manager_profile" "example" {
     protocol = "HTTP"
     port     = 80
     path     = "/"
+  }
+  tags = {
+    yor_trace = "5bc25f25-5df3-48de-a3cc-951248ddea21"
   }
 }
 

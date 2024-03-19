@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "main" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "49f2c6fa-f7b2-48e5-bd6a-f7d5135422dc"
+  }
 }
 
 resource "azurerm_virtual_network" "main" {
@@ -15,6 +18,9 @@ resource "azurerm_virtual_network" "main" {
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.main.location
   resource_group_name = azurerm_resource_group.main.name
+  tags = {
+    yor_trace = "3e52977a-7df4-4167-b161-1e201b7fe081"
+  }
 }
 
 resource "azurerm_subnet" "internal" {
@@ -61,6 +67,9 @@ resource "azurerm_linux_virtual_machine_scale_set" "main" {
   # let's ignore any changes to the number of instances
   lifecycle {
     ignore_changes = ["instances"]
+  }
+  tags = {
+    yor_trace = "f2ae6de8-5038-4e22-b6ca-b83ace16c387"
   }
 }
 
@@ -118,5 +127,8 @@ resource "azurerm_monitor_autoscale_setting" "main" {
         cooldown  = "PT1M"
       }
     }
+  }
+  tags = {
+    yor_trace = "6fa38a65-4e8a-44ae-ac72-0a209c6e0adc"
   }
 }

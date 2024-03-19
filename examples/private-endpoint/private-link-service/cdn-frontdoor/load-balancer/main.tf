@@ -10,6 +10,9 @@ data "azurerm_client_config" "current" {}
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-cdn-frontdoor-loadBalancer-privateLinkOrigin"
   location = "westeurope"
+  tags = {
+    yor_trace = "1f8133bd-0617-4dd2-ad1f-ca5534422051"
+  }
 }
 
 resource "azurerm_virtual_network" "example" {
@@ -17,6 +20,9 @@ resource "azurerm_virtual_network" "example" {
   resource_group_name = azurerm_resource_group.example.name
   location            = azurerm_resource_group.example.location
   address_space       = ["10.5.0.0/16"]
+  tags = {
+    yor_trace = "b6d14455-3830-4990-ae07-40b91a204747"
+  }
 }
 
 resource "azurerm_subnet" "example" {
@@ -34,6 +40,9 @@ resource "azurerm_public_ip" "example" {
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   allocation_method   = "Static"
+  tags = {
+    yor_trace = "1e90a70f-7b62-4431-b337-e05fe09f3ac4"
+  }
 }
 
 resource "azurerm_lb" "example" {
@@ -45,6 +54,9 @@ resource "azurerm_lb" "example" {
   frontend_ip_configuration {
     name                 = azurerm_public_ip.example.name
     public_ip_address_id = azurerm_public_ip.example.id
+  }
+  tags = {
+    yor_trace = "ca1c3f5e-ab7e-401f-b802-88f9c3718dee"
   }
 }
 
@@ -62,6 +74,9 @@ resource "azurerm_private_link_service" "example" {
     private_ip_address_version = "IPv4"
     subnet_id                  = azurerm_subnet.example.id
     primary                    = true
+  }
+  tags = {
+    yor_trace = "fb81e0f7-07fc-4f8a-a85a-aa49178a0e45"
   }
 }
 

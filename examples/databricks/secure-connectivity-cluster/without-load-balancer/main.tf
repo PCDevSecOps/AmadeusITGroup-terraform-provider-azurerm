@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-databrick-connectivity-without-lb"
   location = "eastus2"
+  tags = {
+    yor_trace = "4250e101-3720-4f11-8bf6-0a99cb7bea72"
+  }
 }
 
 resource "azurerm_virtual_network" "example" {
@@ -15,6 +18,9 @@ resource "azurerm_virtual_network" "example" {
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "b7994a18-5bc9-414c-94ee-e716ae9c7ef5"
+  }
 }
 
 resource "azurerm_subnet" "public" {
@@ -71,6 +77,9 @@ resource "azurerm_network_security_group" "example" {
   name                = "${var.prefix}-databricks-nsg"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "2282293c-e5d8-41c5-bbce-23eab25bfb25"
+  }
 }
 
 resource "azurerm_databricks_workspace" "example" {
@@ -95,5 +104,6 @@ resource "azurerm_databricks_workspace" "example" {
   tags = {
     Environment = "Production"
     Pricing     = "Standard"
+    yor_trace   = "ad31f875-9977-467c-90d3-a5d42fe75fbe"
   }
 }

@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-cdn-frontdoor-blob-privateLinkOrigin"
   location = "westeurope"
+  tags = {
+    yor_trace = "52699e27-9bff-4be9-a1a6-10ac0d7485d3"
+  }
 }
 
 resource "azurerm_storage_account" "example" {
@@ -25,6 +28,7 @@ resource "azurerm_storage_account" "example" {
 
   tags = {
     environment = "example"
+    yor_trace   = "10e14225-0dcd-4751-860c-db75bb7e56a0"
   }
 }
 

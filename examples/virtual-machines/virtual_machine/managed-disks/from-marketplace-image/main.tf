@@ -45,4 +45,7 @@ resource "azurerm_virtual_machine" "example" {
   os_profile_linux_config {
     disable_password_authentication = false
   }
+  tags = {
+    yor_trace = "7314b518-fc08-4f0e-b509-9bd49e0420b0"
+  }
 }

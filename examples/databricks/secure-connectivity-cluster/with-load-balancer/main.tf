@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-databrick-connectivity-with-lb"
   location = "eastus2"
+  tags = {
+    yor_trace = "c05771d1-a091-4d6c-9296-529b2f568490"
+  }
 }
 
 resource "azurerm_virtual_network" "example" {
@@ -15,6 +18,9 @@ resource "azurerm_virtual_network" "example" {
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "02cfcd4c-6f10-4b7f-b9d6-55b800899cb7"
+  }
 }
 
 resource "azurerm_subnet" "public" {
@@ -71,6 +77,9 @@ resource "azurerm_network_security_group" "example" {
   name                = "${var.prefix}-databricks-nsg"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "09b6278f-a194-4181-bee6-e092efc3909f"
+  }
 }
 
 resource "azurerm_databricks_workspace" "example" {
@@ -96,6 +105,7 @@ resource "azurerm_databricks_workspace" "example" {
   tags = {
     Environment = "Production"
     Pricing     = "Standard"
+    yor_trace   = "722bfc33-d2b3-4548-824b-703cd9a46e6d"
   }
 }
 
@@ -107,6 +117,9 @@ resource "azurerm_public_ip" "example" {
   allocation_method       = "Static"
 
   sku = "Standard"
+  tags = {
+    yor_trace = "ada785a7-8e23-448b-b1c1-05321787ef97"
+  }
 }
 
 resource "azurerm_lb" "example" {
@@ -119,6 +132,9 @@ resource "azurerm_lb" "example" {
   frontend_ip_configuration {
     name                 = "Databricks-PIP"
     public_ip_address_id = azurerm_public_ip.example.id
+  }
+  tags = {
+    yor_trace = "7e16b127-eb85-4719-8dd2-e63576d18c57"
   }
 }
 

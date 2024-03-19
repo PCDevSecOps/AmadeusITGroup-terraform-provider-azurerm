@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "7464f370-8a6a-400b-a3d1-6a3c36004694"
+  }
 }
 
 resource "azurerm_servicebus_namespace" "example" {
@@ -15,6 +18,9 @@ resource "azurerm_servicebus_namespace" "example" {
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   sku                 = "Standard"
+  tags = {
+    yor_trace = "f1a50a39-bd89-4fa5-b6f2-4f76cd61a9a6"
+  }
 }
 
 resource "azurerm_servicebus_namespace_authorization_rule" "example" {

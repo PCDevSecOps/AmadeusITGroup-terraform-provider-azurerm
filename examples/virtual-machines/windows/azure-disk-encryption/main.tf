@@ -15,6 +15,9 @@ data "azurerm_client_config" "current" {}
 resource "azurerm_resource_group" "test" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "043b108f-b890-46df-a5aa-657126202042"
+  }
 }
 
 resource "azurerm_key_vault" "test" {
@@ -25,6 +28,9 @@ resource "azurerm_key_vault" "test" {
   sku_name                    = "premium"
   enabled_for_disk_encryption = true
   purge_protection_enabled    = true
+  tags = {
+    yor_trace = "9601f600-b2a4-43a0-883d-4625103d294d"
+  }
 }
 
 resource "azurerm_key_vault_access_policy" "service-principal" {
@@ -64,6 +70,9 @@ resource "azurerm_key_vault_key" "test" {
   depends_on = [
     azurerm_key_vault_access_policy.service-principal
   ]
+  tags = {
+    yor_trace = "822b5ac9-c33d-4727-a271-8440075f7f54"
+  }
 }
 
 resource "azurerm_virtual_network" "test" {
@@ -71,6 +80,9 @@ resource "azurerm_virtual_network" "test" {
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.test.location
   resource_group_name = azurerm_resource_group.test.name
+  tags = {
+    yor_trace = "384472fc-6585-4b3f-8b3a-99e02055a435"
+  }
 }
 
 resource "azurerm_subnet" "test" {
@@ -89,6 +101,9 @@ resource "azurerm_network_interface" "test" {
     name                          = "internal"
     subnet_id                     = azurerm_subnet.test.id
     private_ip_address_allocation = "Dynamic"
+  }
+  tags = {
+    yor_trace = "4cf86c78-95c7-4a87-9917-3fa275cbbae8"
   }
 }
 
@@ -114,6 +129,9 @@ resource "azurerm_windows_virtual_machine" "test" {
     storage_account_type = "Standard_LRS"
     caching              = "ReadWrite"
   }
+  tags = {
+    yor_trace = "b0b87b53-7ba2-428a-a7f6-a6cbef2c75ef"
+  }
 }
 
 resource "azurerm_virtual_machine_extension" "test" {
@@ -135,4 +153,7 @@ resource "azurerm_virtual_machine_extension" "test" {
   "VolumeType": "All"
 }
 SETTINGS
+  tags = {
+    yor_trace = "ee736b68-5860-4f08-9d1b-8f783f8121b8"
+  }
 }

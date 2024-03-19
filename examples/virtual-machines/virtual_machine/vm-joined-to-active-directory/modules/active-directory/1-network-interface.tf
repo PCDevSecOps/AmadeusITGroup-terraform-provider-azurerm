@@ -13,4 +13,7 @@ resource "azurerm_network_interface" "primary" {
     private_ip_address_allocation = "Static"
     private_ip_address            = "10.0.1.4"
   }
+  tags = {
+    yor_trace = "e926cb62-c37a-4cdf-8794-6194217baab2"
+  }
 }

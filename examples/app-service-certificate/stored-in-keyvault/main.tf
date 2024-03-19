@@ -10,6 +10,9 @@ data "azurerm_client_config" "current" {}
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "b661eb7e-9fc0-464b-8a67-973ea24144c1"
+  }
 }
 
 resource "azurerm_key_vault" "example" {
@@ -19,6 +22,9 @@ resource "azurerm_key_vault" "example" {
   tenant_id           = data.azurerm_client_config.current.tenant_id
 
   sku_name = "standard"
+  tags = {
+    yor_trace = "5595e221-1bce-43aa-afe6-b0abb54a5bc4"
+  }
 }
 
 resource "azurerm_key_vault_access_policy" "current_user" {
@@ -81,6 +87,9 @@ resource "azurerm_key_vault_certificate" "example" {
   depends_on = [
     azurerm_key_vault_access_policy.current_user
   ]
+  tags = {
+    yor_trace = "88ed7951-d334-4827-8d19-7ac01d1d096c"
+  }
 }
 
 resource "azurerm_app_service_certificate" "example" {
@@ -88,4 +97,7 @@ resource "azurerm_app_service_certificate" "example" {
   resource_group_name = azurerm_resource_group.example.name
   location            = azurerm_resource_group.example.location
   key_vault_secret_id = azurerm_key_vault_certificate.example.secret_id
+  tags = {
+    yor_trace = "4973a460-57a8-49c6-b71d-50e32d45af66"
+  }
 }

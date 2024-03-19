@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "rg" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "9c2af635-3f87-4a38-baf2-663caec16e20"
+  }
 }
 
 resource "azurerm_api_management" "apim_service" {
@@ -19,6 +22,7 @@ resource "azurerm_api_management" "apim_service" {
   sku_name            = "Developer_1"
   tags = {
     Environment = "Example"
+    yor_trace   = "4bf3378e-d298-43bf-bb93-03b8d5964d75"
   }
   policy {
     xml_content = <<XML

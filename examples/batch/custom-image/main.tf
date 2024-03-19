@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "a4703f34-e3d2-4a43-a668-cf21bb679216"
+  }
 }
 
 resource "azurerm_virtual_network" "example" {
@@ -15,6 +18,9 @@ resource "azurerm_virtual_network" "example" {
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "f93e4b22-e1b3-4f35-b834-335de5931f2b"
+  }
 }
 
 resource "azurerm_subnet" "example" {
@@ -30,6 +36,9 @@ resource "azurerm_public_ip" "example" {
   resource_group_name = azurerm_resource_group.example.name
   allocation_method   = "Dynamic"
   domain_name_label   = "batch-custom-img"
+  tags = {
+    yor_trace = "646e07f0-cee3-4c93-b0d3-8e3e82f06825"
+  }
 }
 
 resource "azurerm_network_interface" "example" {
@@ -43,6 +52,9 @@ resource "azurerm_network_interface" "example" {
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.example.id
   }
+  tags = {
+    yor_trace = "84bb7af4-a0cc-4148-aa9c-a2ddf446149e"
+  }
 }
 
 resource "azurerm_storage_account" "example" {
@@ -54,6 +66,7 @@ resource "azurerm_storage_account" "example" {
 
   tags = {
     environment = "Dev"
+    yor_trace   = "c93e2b88-f251-4a15-9be6-6c2c78529a1c"
   }
 }
 
@@ -98,6 +111,7 @@ resource "azurerm_virtual_machine" "example" {
   tags = {
     environment = "Dev"
     cost-center = "Ops"
+    yor_trace   = "48cc3193-2d80-48ed-ad5e-3c1038dae315"
   }
 }
 
@@ -117,12 +131,16 @@ resource "azurerm_image" "example" {
   tags = {
     environment = "Dev"
     cost-center = "Ops"
+    yor_trace   = "f1833997-9f1f-42b6-ae0c-07c810f19ba7"
   }
 }
 resource "azurerm_batch_account" "example" {
   name                = "${var.prefix}batch"
   resource_group_name = azurerm_resource_group.example.name
   location            = azurerm_resource_group.example.location
+  tags = {
+    yor_trace = "1dd3d33b-0222-4262-9c14-9debcaee1c92"
+  }
 }
 
 resource "azurerm_batch_pool" "example" {

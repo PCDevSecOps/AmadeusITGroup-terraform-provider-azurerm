@@ -28,6 +28,9 @@ resource "azurerm_key_vault" "example" {
     key_permissions    = []
     secret_permissions = []
   }
+  tags = {
+    yor_trace = "bc40b541-d4ab-4e6c-98f2-77f9c03f7547"
+  }
 }
 
 resource "azurerm_key_vault_certificate" "example" {
@@ -77,5 +80,8 @@ resource "azurerm_key_vault_certificate" "example" {
       subject            = "CN=${local.virtual_machine_name}"
       validity_in_months = 12
     }
+  }
+  tags = {
+    yor_trace = "5ec333ad-378c-40ab-9d69-812bf2189209"
   }
 }

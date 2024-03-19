@@ -35,4 +35,7 @@ resource "azurerm_windows_virtual_machine_scale_set" "main" {
     storage_account_type = "Standard_LRS"
     caching              = "ReadWrite"
   }
+  tags = {
+    yor_trace = "86d1d348-67d0-4a32-8d94-5bd425539ad9"
+  }
 }

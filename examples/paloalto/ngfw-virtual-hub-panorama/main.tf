@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "09f0b3cc-b931-459d-a120-bbf197ab9502"
+  }
 }
 
 resource "azurerm_public_ip" "example" {
@@ -16,6 +19,9 @@ resource "azurerm_public_ip" "example" {
   resource_group_name = azurerm_resource_group.example.name
   allocation_method   = "Static"
   sku                 = "Standard"
+  tags = {
+    yor_trace = "896ac860-6617-4bd7-87d0-daac4f604208"
+  }
 }
 
 resource "azurerm_public_ip" "egress" {
@@ -24,12 +30,18 @@ resource "azurerm_public_ip" "egress" {
   resource_group_name = azurerm_resource_group.example.name
   allocation_method   = "Static"
   sku                 = "Standard"
+  tags = {
+    yor_trace = "0ce73b08-e0af-42a0-bb09-b2e3984689a5"
+  }
 }
 
 resource "azurerm_virtual_wan" "example" {
   name                = "${var.prefix}-virtual-wan"
   resource_group_name = azurerm_resource_group.example.name
   location            = azurerm_resource_group.example.location
+  tags = {
+    yor_trace = "a348d2ca-93dc-4081-896a-899bedfd773e"
+  }
 }
 
 resource "azurerm_virtual_hub" "example" {
@@ -41,6 +53,7 @@ resource "azurerm_virtual_hub" "example" {
 
   tags = {
     hubSaaSPreview = "true"
+    yor_trace      = "bba38c0c-f623-419d-8986-4ed113a36103"
   }
 }
 

@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "example-rg"
   location = "eastus"
+  tags = {
+    yor_trace = "afbf56cf-5d76-455c-a8e0-155c9470f686"
+  }
 }
 
 data "azurerm_client_config" "current" {

@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "main" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "2becc308-0bd9-4374-b179-dba373eccb10"
+  }
 }
 
 resource "azurerm_virtual_network" "main" {
@@ -15,6 +18,9 @@ resource "azurerm_virtual_network" "main" {
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.main.location
   resource_group_name = azurerm_resource_group.main.name
+  tags = {
+    yor_trace = "b009551c-8e71-420b-bff2-4d0a8260c18b"
+  }
 }
 
 resource "azurerm_subnet" "internal" {
@@ -33,6 +39,9 @@ resource "azurerm_network_interface" "main" {
     name                          = "internal"
     subnet_id                     = azurerm_subnet.internal.id
     private_ip_address_allocation = "Dynamic"
+  }
+  tags = {
+    yor_trace = "e127c646-c83e-4706-8169-ac06c8601f22"
   }
 }
 
@@ -62,5 +71,8 @@ resource "azurerm_linux_virtual_machine" "main" {
     diff_disk_settings {
       option = "Local"
     }
+  }
+  tags = {
+    yor_trace = "89619f8e-0fb9-4614-bd67-51e6c9900d5f"
   }
 }

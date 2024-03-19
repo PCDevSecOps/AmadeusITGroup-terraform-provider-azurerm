@@ -18,6 +18,9 @@ locals {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "a283ab23-d5e7-44bf-922a-6db510c35cc7"
+  }
 }
 
 resource "azurerm_virtual_network" "example" {
@@ -25,6 +28,9 @@ resource "azurerm_virtual_network" "example" {
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "18d00728-4288-43a4-98fc-1e411fe981cf"
+  }
 }
 
 resource "azurerm_subnet" "example" {
@@ -41,6 +47,9 @@ resource "azurerm_private_dns_zone" "example" {
 
   name                = each.value
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "4cacbbc7-61cc-4c1a-91b0-7d59946a894a"
+  }
 }
 
 resource "azurerm_monitor_private_link_scope" "example" {
@@ -64,5 +73,8 @@ resource "azurerm_private_endpoint" "this" {
     is_manual_connection           = false
     private_connection_resource_id = azurerm_monitor_private_link_scope.example.id
     subresource_names              = ["azuremonitor"]
+  }
+  tags = {
+    yor_trace = "f25dfa94-f0ca-45b5-b0e5-303acd36e679"
   }
 }

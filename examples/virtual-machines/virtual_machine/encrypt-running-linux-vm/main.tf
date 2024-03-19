@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "rg" {
   name     = var.resource_group
   location = var.location
+  tags = {
+    yor_trace = "ea597251-d60f-4491-a482-91dd83d65e91"
+  }
 }
 
 resource "azurerm_virtual_network" "vnet" {
@@ -15,6 +18,9 @@ resource "azurerm_virtual_network" "vnet" {
   location            = var.location
   address_space       = ["${var.address_space}"]
   resource_group_name = azurerm_resource_group.rg.name
+  tags = {
+    yor_trace = "928cd967-6f49-4e94-b25f-a7294251108e"
+  }
 }
 
 resource "azurerm_subnet" "subnet" {
@@ -34,6 +40,9 @@ resource "azurerm_network_interface" "nic" {
     subnet_id                     = azurerm_subnet.subnet.id
     private_ip_address_allocation = "Dynamic"
   }
+  tags = {
+    yor_trace = "8fba90e3-616f-41ae-bb19-e3f14323cdf3"
+  }
 }
 
 resource "azurerm_storage_account" "stor" {
@@ -42,6 +51,9 @@ resource "azurerm_storage_account" "stor" {
   location                 = azurerm_resource_group.rg.location
   account_tier             = var.storage_account_tier
   account_replication_type = var.storage_replication_type
+  tags = {
+    yor_trace = "4ee57887-86e2-46bf-9106-3fb0b6ed4f31"
+  }
 }
 
 resource "azurerm_virtual_machine" "vm" {
@@ -72,6 +84,9 @@ resource "azurerm_virtual_machine" "vm" {
 
   os_profile_linux_config {
     disable_password_authentication = false
+  }
+  tags = {
+    yor_trace = "5f135ff2-c1be-424c-ab0c-2308cf86ae89"
   }
 }
 

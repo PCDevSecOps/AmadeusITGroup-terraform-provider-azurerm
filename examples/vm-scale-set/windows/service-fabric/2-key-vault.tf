@@ -60,6 +60,9 @@ resource "azurerm_key_vault" "main" {
       "Set",
     ]
   }
+  tags = {
+    yor_trace = "4ac4c7d3-05cb-420b-882b-e9af07716e41"
+  }
 }
 
 resource "azurerm_key_vault_certificate" "primary" {
@@ -114,6 +117,9 @@ resource "azurerm_key_vault_certificate" "primary" {
       validity_in_months = 12
     }
   }
+  tags = {
+    yor_trace = "5c63a081-98b9-46d0-88a2-8c9336412a43"
+  }
 }
 
 resource "azurerm_key_vault_certificate" "secondary" {
@@ -167,5 +173,8 @@ resource "azurerm_key_vault_certificate" "secondary" {
       subject            = "CN=${local.vmss_name}"
       validity_in_months = 12
     }
+  }
+  tags = {
+    yor_trace = "0d730b03-483e-43d3-bebb-deeaec02ae43"
   }
 }

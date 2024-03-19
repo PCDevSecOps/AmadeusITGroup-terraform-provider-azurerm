@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "6ca9fb0f-ed99-4191-9875-2c171cb7db74"
+  }
 }
 
 resource "azurerm_container_group" "example" {
@@ -39,5 +42,6 @@ resource "azurerm_container_group" "example" {
 
   tags = {
     environment = "testing"
+    yor_trace   = "f59d47dc-e0e4-4eca-8223-2ceb76ff94c5"
   }
 }

@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "example-resources"
   location = var.location
+  tags = {
+    yor_trace = "1b32ccd4-39c9-4333-a6f1-ee18efcecf26"
+  }
 }
 
 # Virtual Machine Resources
@@ -17,6 +20,9 @@ resource "azurerm_virtual_network" "example" {
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "d6b4232e-d7fe-4e5a-b0dd-5fe4a8abe5b0"
+  }
 }
 
 resource "azurerm_subnet" "example" {
@@ -35,6 +41,9 @@ resource "azurerm_network_interface" "example" {
     name                          = "example-ip"
     subnet_id                     = azurerm_subnet.example.id
     private_ip_address_allocation = "Dynamic"
+  }
+  tags = {
+    yor_trace = "3fa23a05-f526-438f-aa02-436ab1903bf4"
   }
 }
 
@@ -60,6 +69,9 @@ resource "azurerm_windows_virtual_machine" "example" {
     sku       = "2016-Datacenter"
     version   = "latest"
   }
+  tags = {
+    yor_trace = "cfee20e2-90ff-4397-a620-2322e9109c90"
+  }
 }
 
 resource "azurerm_virtual_machine_extension" "example" {
@@ -75,4 +87,7 @@ resource "azurerm_virtual_machine_extension" "example" {
         "commandToExecute": "powershell -ExecutionPolicy Unrestricted -file ConfigureRemotingForAnsible.ps1 -EnableCredSSP -DisableBasicAuth"
     }
 SETTINGS
+  tags = {
+    yor_trace = "859615ab-9a73-4716-8b51-1b60fd3e51ea"
+  }
 }

@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "8ebf46d9-8f4a-4788-b4fc-8819124c0ce1"
+  }
 }
 
 # NOTE: the Name used for Redis needs to be globally unique
@@ -19,4 +22,7 @@ resource "azurerm_redis_cache" "example" {
   family              = "C"
   sku_name            = "Basic"
   enable_non_ssl_port = false
+  tags = {
+    yor_trace = "b984acec-aca9-4d1d-bd15-f92fe41511ff"
+  }
 }

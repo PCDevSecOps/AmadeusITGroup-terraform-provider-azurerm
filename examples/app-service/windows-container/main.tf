@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "3c9f6b12-20fd-4df8-9808-a6466a00db95"
+  }
 }
 
 resource "azurerm_service_plan" "example" {

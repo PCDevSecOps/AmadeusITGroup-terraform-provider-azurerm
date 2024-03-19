@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "9c54b1aa-07f5-40f6-aa0c-2024e735b097"
+  }
 }
 
 # NOTE: the Name used for Redis needs to be globally unique
@@ -22,4 +25,7 @@ resource "azurerm_redis_cache" "example" {
   minimum_tls_version = "1.2"
 
   redis_configuration {}
+  tags = {
+    yor_trace = "d854c8af-7193-4793-8c7d-b19596375d25"
+  }
 }

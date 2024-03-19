@@ -8,12 +8,18 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "ed34c306-3f34-4065-93cb-644db53b79cc"
+  }
 }
 
 resource "azurerm_user_assigned_identity" "example" {
   name                = "search-api"
   resource_group_name = azurerm_resource_group.example.name
   location            = azurerm_resource_group.example.location
+  tags = {
+    yor_trace = "119eeb14-609a-445a-8b43-83544f8c84d1"
+  }
 }
 
 resource "azurerm_storage_account" "example" {
@@ -25,6 +31,9 @@ resource "azurerm_storage_account" "example" {
   account_kind             = "StorageV2"
   account_replication_type = "LRS"
   is_hns_enabled           = true
+  tags = {
+    yor_trace = "1ae5a0a5-39de-41bb-baf8-3bfce140f2ad"
+  }
 }
 
 data "azurerm_client_config" "current" {}

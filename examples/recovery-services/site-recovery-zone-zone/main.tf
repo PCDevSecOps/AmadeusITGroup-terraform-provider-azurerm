@@ -12,11 +12,17 @@ locals {
 resource "azurerm_resource_group" "primary" {
   name     = "${var.prefix}-resources-primary"
   location = var.location
+  tags = {
+    yor_trace = "7ee4be1a-40b6-4288-80a6-20819d141ffb"
+  }
 }
 
 resource "azurerm_resource_group" "secondary" {
   name     = "${var.prefix}-resources-secondary"
   location = var.location
+  tags = {
+    yor_trace = "a235cb92-18a5-42cf-a0f6-c8d01b0cbf64"
+  }
 }
 
 // Source Vritual Machine
@@ -25,6 +31,9 @@ resource "azurerm_virtual_network" "example" {
   resource_group_name = azurerm_resource_group.primary.name
   address_space       = ["192.168.1.0/24"]
   location            = azurerm_resource_group.primary.location
+  tags = {
+    yor_trace = "d95b3583-ed34-4bcd-ad24-d1d27e3747dc"
+  }
 }
 
 resource "azurerm_subnet" "example" {
@@ -42,6 +51,9 @@ resource "azurerm_network_interface" "example" {
     name                          = "${var.prefix}-ipconfig"
     subnet_id                     = azurerm_subnet.example.id
     private_ip_address_allocation = "Dynamic"
+  }
+  tags = {
+    yor_trace = "7a6660e0-2334-4dd2-becf-c9f9c10a7489"
   }
 }
 
@@ -70,6 +82,9 @@ resource "azurerm_windows_virtual_machine" "example" {
   }
 
   zone = "1"
+  tags = {
+    yor_trace = "6f780c6f-743a-4a46-bc7f-bae148bb64ec"
+  }
 }
 
 data "azurerm_managed_disk" "os_disk" {
@@ -84,6 +99,9 @@ resource "azurerm_recovery_services_vault" "example" {
   resource_group_name = azurerm_resource_group.secondary.name
   sku                 = "Standard"
   soft_delete_enabled = false
+  tags = {
+    yor_trace = "6e67d37c-80ac-4c3b-a807-7186348ec26e"
+  }
 }
 
 resource "azurerm_site_recovery_fabric" "example" {
@@ -131,6 +149,9 @@ resource "azurerm_storage_account" "example" {
   resource_group_name      = azurerm_resource_group.primary.name
   account_tier             = "Standard"
   account_replication_type = "LRS"
+  tags = {
+    yor_trace = "e60e82d9-d352-458f-8b3c-bbb11d811094"
+  }
 }
 
 resource "azurerm_site_recovery_replicated_vm" "example" {

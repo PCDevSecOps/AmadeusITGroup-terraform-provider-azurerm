@@ -42,6 +42,9 @@ resource "azurerm_key_vault_key" "test" {
   ]
 
   depends_on = ["azurerm_key_vault_access_policy.service-principal"]
+  tags = {
+    yor_trace = "5e747664-e0d2-4a0a-a0a4-2bca91982553"
+  }
 }
 
 resource "azurerm_disk_encryption_set" "test" {
@@ -52,6 +55,9 @@ resource "azurerm_disk_encryption_set" "test" {
 
   identity {
     type = "SystemAssigned"
+  }
+  tags = {
+    yor_trace = "38198ff3-4d06-49c9-85aa-3c20a77d28e8"
   }
 }
 
@@ -90,4 +96,7 @@ resource "azurerm_managed_disk" "test" {
     "azurerm_role_assignment.disk-encryption-read-keyvault",
     "azurerm_key_vault_access_policy.disk-encryption",
   ]
+  tags = {
+    yor_trace = "e7a91e61-6efd-433f-b133-f6304523c538"
+  }
 }

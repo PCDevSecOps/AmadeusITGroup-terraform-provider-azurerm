@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "c938e817-1a94-4b12-a4f6-c4123fa526a4"
+  }
 }
 
 # NOTE: the Name used for Redis needs to be globally unique
@@ -25,5 +28,8 @@ resource "azurerm_redis_cache" "example" {
     maxmemory_reserved = 2
     maxmemory_delta    = 2
     maxmemory_policy   = "allkeys-lru"
+  }
+  tags = {
+    yor_trace = "40a3b5cf-4afb-4b00-b3dc-73f9632f8924"
   }
 }

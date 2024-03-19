@@ -7,6 +7,9 @@ resource "azurerm_virtual_network" "example" {
   address_space       = ["10.0.0.0/16"]
   resource_group_name = var.resource_group_name
   dns_servers         = ["10.0.1.4", "8.8.8.8"]
+  tags = {
+    yor_trace = "e543a110-ae69-48b8-907d-ddd0b101962d"
+  }
 }
 
 resource "azurerm_subnet" "domain-controllers" {

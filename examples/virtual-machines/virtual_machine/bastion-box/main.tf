@@ -21,6 +21,9 @@ resource "azurerm_network_interface" "example" {
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.example.id
   }
+  tags = {
+    yor_trace = "13ea3a03-04f9-4e50-89f8-05a5e5215b85"
+  }
 }
 
 resource "azurerm_network_interface_security_group_association" "example" {
@@ -33,6 +36,9 @@ resource "azurerm_public_ip" "example" {
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   allocation_method   = "Dynamic"
+  tags = {
+    yor_trace = "6267464f-78cb-4c5c-b674-108eb3b5a249"
+  }
 }
 
 resource "azurerm_virtual_machine" "example" {
@@ -68,5 +74,8 @@ resource "azurerm_virtual_machine" "example" {
       path     = "/home/${local.admin_username}/.ssh/authorized_keys"
       key_data = local.public_ssh_key
     }
+  }
+  tags = {
+    yor_trace = "9a2478e9-eae7-4d65-88ad-dbdc15df3c13"
   }
 }

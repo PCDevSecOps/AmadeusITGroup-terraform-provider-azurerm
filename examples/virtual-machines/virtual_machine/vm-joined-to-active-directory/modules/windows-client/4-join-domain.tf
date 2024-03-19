@@ -28,4 +28,7 @@ SETTINGS
 SETTINGS
 
   depends_on = ["null_resource.wait-for-domain-to-provision"]
+  tags = {
+    yor_trace = "7b391992-6385-48df-b1ea-cd2283f36cb5"
+  }
 }

@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "main" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "41fd0b7c-93b8-41a5-bf83-eb055dbc9532"
+  }
 }
 
 resource "azurerm_virtual_network" "main" {
@@ -15,6 +18,9 @@ resource "azurerm_virtual_network" "main" {
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.main.location
   resource_group_name = azurerm_resource_group.main.name
+  tags = {
+    yor_trace = "c1d09365-7ecb-4b93-86da-61dc55186498"
+  }
 }
 
 resource "azurerm_subnet" "internal" {
@@ -33,6 +39,9 @@ resource "azurerm_network_interface" "main" {
     name                          = "internal"
     subnet_id                     = azurerm_subnet.internal.id
     private_ip_address_allocation = "Dynamic"
+  }
+  tags = {
+    yor_trace = "06cc9716-3025-45eb-945d-1fd9ce00fbd4"
   }
 }
 
@@ -59,6 +68,9 @@ resource "azurerm_linux_virtual_machine" "main" {
     storage_account_type = "Standard_LRS"
     caching              = "ReadWrite"
   }
+  tags = {
+    yor_trace = "eef99959-24cc-4d51-a16e-a1241170a0c3"
+  }
 }
 
 resource "azurerm_managed_disk" "data" {
@@ -68,6 +80,9 @@ resource "azurerm_managed_disk" "data" {
   disk_size_gb         = 10
   resource_group_name  = azurerm_resource_group.main.name
   storage_account_type = "Standard_LRS"
+  tags = {
+    yor_trace = "0d2daf85-3e2a-49c0-9fb1-af0c09140269"
+  }
 }
 
 resource "azurerm_virtual_machine_data_disk_attachment" "data" {

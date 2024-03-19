@@ -12,6 +12,9 @@ locals {
 resource "azurerm_resource_group" "test" {
   name     = local.resource_group_name
   location = "West Europe"
+  tags = {
+    yor_trace = "2a835738-b8be-4aa3-af60-5051a2f8841a"
+  }
 }
 
 module "network" {

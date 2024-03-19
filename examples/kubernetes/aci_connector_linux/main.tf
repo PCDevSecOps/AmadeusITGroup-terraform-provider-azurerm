@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-k8s-rg"
   location = var.location
+  tags = {
+    yor_trace = "f650990d-4ecb-459f-b0c2-558faa717095"
+  }
 }
 
 resource "azurerm_virtual_network" "example" {
@@ -15,6 +18,9 @@ resource "azurerm_virtual_network" "example" {
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   address_space       = ["10.10.0.0/16"]
+  tags = {
+    yor_trace = "a3489979-e1d3-4427-8506-8dc5d5ea69d7"
+  }
 }
 
 resource "azurerm_subnet" "example-nodepool" {
@@ -68,6 +74,9 @@ resource "azurerm_kubernetes_cluster" "example" {
 
   azure_policy_enabled             = false
   http_application_routing_enabled = false
+  tags = {
+    yor_trace = "fa96286f-8e12-451f-9fd5-cac86a65da6e"
+  }
 }
 
 resource "azurerm_role_assignment" "example" {

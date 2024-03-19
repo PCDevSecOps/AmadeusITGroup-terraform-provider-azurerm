@@ -37,4 +37,7 @@ resource "azurerm_virtual_machine" "client" {
     provision_vm_agent        = true
     enable_automatic_upgrades = true
   }
+  tags = {
+    yor_trace = "75c66a22-daec-4ca6-960b-77cee5a56dc0"
+  }
 }

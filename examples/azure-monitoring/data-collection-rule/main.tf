@@ -7,6 +7,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "f036e3b8-83e1-4fde-9ea2-ac511a31c3c2"
+  }
 }
 resource "azurerm_log_analytics_workspace" "workspace" {
   name                = "${var.prefix}-law"
@@ -14,6 +17,9 @@ resource "azurerm_log_analytics_workspace" "workspace" {
   resource_group_name = azurerm_resource_group.example.name
   sku                 = "PerGB2018"
   retention_in_days   = 30
+  tags = {
+    yor_trace = "113abdc3-af7d-47a0-994d-836bc9557e65"
+  }
 }
 
 resource "azurerm_log_analytics_solution" "vminsights" {
@@ -25,6 +31,9 @@ resource "azurerm_log_analytics_solution" "vminsights" {
   plan {
     publisher = "Microsoft"
     product   = "OMSGallery/VMInsights"
+  }
+  tags = {
+    yor_trace = "ba4a25b0-025b-425d-8ffc-18006e7a5d02"
   }
 }
 
@@ -73,6 +82,9 @@ resource "azurerm_virtual_network" "example" {
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "289d14f1-425d-4892-b452-682342a8870e"
+  }
 }
 
 resource "azurerm_subnet" "example" {
@@ -92,12 +104,18 @@ resource "azurerm_network_interface" "example" {
     subnet_id                     = azurerm_subnet.example.id
     private_ip_address_allocation = "Dynamic"
   }
+  tags = {
+    yor_trace = "b8cae588-b795-4f31-a35e-0952adb88f4a"
+  }
 }
 
 resource "azurerm_user_assigned_identity" "example" {
   name                = "${var.prefix}-id"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "098e0afb-779c-41b3-95d7-f9c3f9b5d6f6"
+  }
 }
 
 #VM
@@ -127,6 +145,9 @@ resource "azurerm_windows_virtual_machine" "example" {
     type         = "UserAssigned"
     identity_ids = [azurerm_user_assigned_identity.example.id]
   }
+  tags = {
+    yor_trace = "8f384589-2321-429e-9860-5602c0081eff"
+  }
 }
 
 # Azure Monitor Extension
@@ -154,6 +175,9 @@ resource "azurerm_virtual_machine_extension" "azuremonitorwindowsagent" {
   protected_settings = jsonencode({
     "workspaceKey" = azurerm_log_analytics_workspace.workspace.primary_shared_key
   })
+  tags = {
+    yor_trace = "6df4de1f-f64e-4488-874f-cd78368c7da8"
+  }
 }
 
 resource "azurerm_virtual_machine_extension" "da" {
@@ -164,6 +188,9 @@ resource "azurerm_virtual_machine_extension" "da" {
   type_handler_version       = "9.10"
   automatic_upgrade_enabled  = true
   auto_upgrade_minor_version = true
+  tags = {
+    yor_trace = "7bef6c38-43e7-42b8-9e27-53d91acf1fa5"
+  }
 }
 
 resource "azurerm_monitor_data_collection_rule_association" "example1" {

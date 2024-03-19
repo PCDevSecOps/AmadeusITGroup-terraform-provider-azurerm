@@ -15,6 +15,9 @@ resource "azurerm_network_interface" "example" {
     subnet_id                     = var.subnet_id
     private_ip_address_allocation = "Dynamic"
   }
+  tags = {
+    yor_trace = "e1427a0c-01f7-4d59-8840-015db8a8e182"
+  }
 }
 
 resource "azurerm_virtual_machine" "example" {
@@ -48,6 +51,9 @@ resource "azurerm_virtual_machine" "example" {
   os_profile_linux_config {
     disable_password_authentication = false
   }
+  tags = {
+    yor_trace = "44a9e714-9ccd-4e28-b962-cdb1cc88d25c"
+  }
 }
 
 resource "azurerm_virtual_machine_extension" "example" {
@@ -63,4 +69,7 @@ resource "azurerm_virtual_machine_extension" "example" {
         "commandToExecute": "sudo bash -c 'apt-get update && apt-get -y install apache2' "
     }
 SETTINGS
+  tags = {
+    yor_trace = "3e9da1aa-2421-4f51-959e-2c2a44311c29"
+  }
 }

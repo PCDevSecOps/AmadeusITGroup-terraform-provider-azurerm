@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "main" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "a079001f-fa6e-4f3b-8a00-b32e8af63602"
+  }
 }
 
 resource "azurerm_virtual_network" "main" {
@@ -15,6 +18,9 @@ resource "azurerm_virtual_network" "main" {
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.main.location
   resource_group_name = azurerm_resource_group.main.name
+  tags = {
+    yor_trace = "6b5fad78-e54b-4c80-ad46-c9c31767d521"
+  }
 }
 
 resource "azurerm_subnet" "internal" {
@@ -58,6 +64,9 @@ resource "azurerm_key_vault" "main" {
     storage_permissions = [
       "Set",
     ]
+  }
+  tags = {
+    yor_trace = "8f4866c8-a545-4cf1-b84c-01ea44b92dc1"
   }
 }
 
@@ -105,6 +114,9 @@ resource "azurerm_key_vault_certificate" "main" {
       validity_in_months = 12
     }
   }
+  tags = {
+    yor_trace = "7e0a1b17-3baf-4cec-bd46-fa430a65fcfb"
+  }
 }
 
 resource "azurerm_linux_virtual_machine_scale_set" "main" {
@@ -146,5 +158,8 @@ resource "azurerm_linux_virtual_machine_scale_set" "main" {
     certificate {
       url = azurerm_key_vault_certificate.main.secret_id
     }
+  }
+  tags = {
+    yor_trace = "c5686fcc-d756-4928-a556-1530a582c9c6"
   }
 }

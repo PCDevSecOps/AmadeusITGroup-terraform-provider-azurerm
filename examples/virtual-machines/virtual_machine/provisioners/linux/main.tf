@@ -50,4 +50,7 @@ resource "azurerm_virtual_machine" "example" {
       "ls -la",
     ]
   }
+  tags = {
+    yor_trace = "4e0a8afd-eea1-49d5-9ba7-bf6a08781678"
+  }
 }

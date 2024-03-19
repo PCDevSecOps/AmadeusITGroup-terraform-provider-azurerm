@@ -7,6 +7,9 @@ resource "azurerm_public_ip" "example" {
   resource_group_name = azurerm_resource_group.example.name
   allocation_method   = "Dynamic"
   domain_name_label   = "exampleservicefabric"
+  tags = {
+    yor_trace = "12036417-0825-4430-96b2-6c4b2a42a35f"
+  }
 }
 
 resource "azurerm_lb" "example" {
@@ -17,6 +20,9 @@ resource "azurerm_lb" "example" {
   frontend_ip_configuration {
     name                 = "PublicIPAddress"
     public_ip_address_id = azurerm_public_ip.example.id
+  }
+  tags = {
+    yor_trace = "9f88df24-4b93-42a0-9abf-2556329a64b6"
   }
 }
 

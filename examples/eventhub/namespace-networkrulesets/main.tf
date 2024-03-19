@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "c8bf5ad0-2249-4fdc-a2ea-f47bedfffc45"
+  }
 }
 
 resource "azurerm_virtual_network" "example1" {
@@ -15,6 +18,9 @@ resource "azurerm_virtual_network" "example1" {
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "9579ef75-b94d-42f2-a5dc-d241026278cf"
+  }
 }
 
 resource "azurerm_subnet" "example1" {
@@ -30,6 +36,9 @@ resource "azurerm_virtual_network" "example2" {
   address_space       = ["10.1.0.0/16"]
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "69a5b204-4b5e-4ab4-af03-32feedef7205"
+  }
 }
 
 resource "azurerm_subnet" "example2" {
@@ -67,5 +76,8 @@ resource "azurerm_eventhub_namespace" "example" {
     ip_rule {
       ip_mask = "10.1.1.0/24"
     }
+  }
+  tags = {
+    yor_trace = "bf5173b3-b350-4ac7-9133-b7e069758544"
   }
 }

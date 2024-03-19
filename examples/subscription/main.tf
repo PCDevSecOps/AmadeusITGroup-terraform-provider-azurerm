@@ -8,5 +8,6 @@ resource "azurerm_subscription" "subscription" {
   workload          = "Production"
   tags = {
     "Environment" = "Production"
+    yor_trace     = "6a756f37-bdb8-47c1-adba-712b2fac93c2"
   }
 }

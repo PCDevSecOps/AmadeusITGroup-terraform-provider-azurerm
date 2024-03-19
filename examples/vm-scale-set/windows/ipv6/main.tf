@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "main" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "8958e547-683d-4264-a6e4-907cb13aa02d"
+  }
 }
 
 resource "azurerm_windows_virtual_machine_scale_set" "main" {
@@ -41,5 +44,8 @@ resource "azurerm_windows_virtual_machine_scale_set" "main" {
   os_disk {
     storage_account_type = "Standard_LRS"
     caching              = "ReadWrite"
+  }
+  tags = {
+    yor_trace = "eeadd074-f15f-4f7f-ae5a-7a3218d6229e"
   }
 }

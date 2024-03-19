@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-functions-python-rg"
   location = var.location
+  tags = {
+    yor_trace = "85bfbf33-d5b2-4f80-b103-8ba3632e9109"
+  }
 }
 
 resource "azurerm_storage_account" "example" {
@@ -16,6 +19,9 @@ resource "azurerm_storage_account" "example" {
   location                 = azurerm_resource_group.example.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
+  tags = {
+    yor_trace = "7de24098-0185-485f-a8de-8c936f74e00e"
+  }
 }
 
 resource "azurerm_service_plan" "example" {

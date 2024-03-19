@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-anw-resources"
   location = var.location
+  tags = {
+    yor_trace = "5f712d4a-09f0-4318-911e-265ebac9614c"
+  }
 }
 
 resource "azurerm_route_table" "example" {
@@ -21,6 +24,9 @@ resource "azurerm_route_table" "example" {
     next_hop_type          = "VirtualAppliance"
     next_hop_in_ip_address = "10.10.1.1"
   }
+  tags = {
+    yor_trace = "6b5a24ca-2cc7-41c8-9427-279a81f2a8ed"
+  }
 }
 
 resource "azurerm_virtual_network" "example" {
@@ -28,6 +34,9 @@ resource "azurerm_virtual_network" "example" {
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   address_space       = ["10.1.0.0/16"]
+  tags = {
+    yor_trace = "2506726a-41c9-4caf-96ef-b9e130d93b78"
+  }
 }
 
 resource "azurerm_subnet" "example" {
@@ -77,4 +86,7 @@ resource "azurerm_kubernetes_cluster" "example" {
   }
 
   depends_on = [azurerm_subnet_route_table_association.example]
+  tags = {
+    yor_trace = "8e8dd777-58e8-4cef-bf67-f8572618a389"
+  }
 }

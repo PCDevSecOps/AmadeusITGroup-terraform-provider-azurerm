@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "34071ff8-5ba6-4c07-b562-788ad95b21ae"
+  }
 }
 
 resource "azurerm_virtual_network" "example" {
@@ -15,6 +18,9 @@ resource "azurerm_virtual_network" "example" {
   resource_group_name = azurerm_resource_group.example.name
   location            = azurerm_resource_group.example.location
   address_space       = ["10.0.0.0/16"]
+  tags = {
+    yor_trace = "4c0d0831-2978-449f-b2d8-500c10c19797"
+  }
 }
 
 resource "azurerm_subnet" "example" {
@@ -69,5 +75,8 @@ resource "azurerm_virtual_machine_scale_set" "example" {
     offer     = "0001-com-ubuntu-server-jammy"
     sku       = "22_04-lts"
     version   = "latest"
+  }
+  tags = {
+    yor_trace = "49c37a95-f4ef-42d6-9735-ae18a7b9f34c"
   }
 }

@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "main" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "f419e12a-8d33-496b-92e0-2d518bc24c28"
+  }
 }
 
 resource "azurerm_virtual_network" "main" {
@@ -15,6 +18,9 @@ resource "azurerm_virtual_network" "main" {
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.main.location
   resource_group_name = azurerm_resource_group.main.name
+  tags = {
+    yor_trace = "690c989f-83f6-4b53-a74a-ccdef0680954"
+  }
 }
 
 resource "azurerm_subnet" "internal" {
@@ -33,6 +39,9 @@ resource "azurerm_network_interface" "main" {
     name                          = "internal"
     subnet_id                     = azurerm_subnet.internal.id
     private_ip_address_allocation = "Dynamic"
+  }
+  tags = {
+    yor_trace = "da0a6bfa-612c-4b51-862e-bf40ee169321"
   }
 }
 
@@ -99,5 +108,8 @@ resource "azurerm_orchestrated_virtual_machine_scale_set" "main" {
       "port"        = 80
       "requestPath" = "/healthEndpoint"
     })
+  }
+  tags = {
+    yor_trace = "ff0cf1c1-c5b7-4b89-af51-f050035c6c8b"
   }
 }

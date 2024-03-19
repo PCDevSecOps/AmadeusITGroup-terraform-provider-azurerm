@@ -35,6 +35,9 @@ resource "azurerm_key_vault" "example" {
       "Set",
     ]
   }
+  tags = {
+    yor_trace = "519202ae-c76a-4ac4-91c6-4d096e1de999"
+  }
 }
 
 resource "azurerm_key_vault_certificate" "example" {
@@ -85,5 +88,8 @@ resource "azurerm_key_vault_certificate" "example" {
       subject            = "CN=${var.prefix}servicefabric.${var.location}.cloudapp.azure.com"
       validity_in_months = 12
     }
+  }
+  tags = {
+    yor_trace = "b3d8e4e3-d73d-4b5d-813c-25d69a7244bd"
   }
 }

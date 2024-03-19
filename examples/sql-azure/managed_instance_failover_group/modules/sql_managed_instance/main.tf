@@ -5,6 +5,9 @@ resource "azurerm_network_security_group" "nsg" {
   name                = "${var.prefix}-mi-security-group"
   location            = var.location
   resource_group_name = var.resource_group_name
+  tags = {
+    yor_trace = "a6e59f08-51e5-4f2a-9d56-42fe5d67de24"
+  }
 }
 
 resource "azurerm_network_security_rule" "allow_management_inbound" {
@@ -180,6 +183,9 @@ resource "azurerm_virtual_network" "vnet" {
   resource_group_name = var.resource_group_name
   address_space       = [var.vnet_range]
   location            = var.location
+  tags = {
+    yor_trace = "519781f1-cf20-49f5-b9bf-b77c3222a182"
+  }
 }
 
 resource "azurerm_subnet" "subnet" {
@@ -1183,6 +1189,9 @@ resource "azurerm_route_table" "rt" {
   depends_on = [
     azurerm_subnet.subnet,
   ]
+  tags = {
+    yor_trace = "d7943c5e-ffa6-49fb-ade0-f9ef860fb43a"
+  }
 }
 
 resource "azurerm_subnet_route_table_association" "subnet_rt" {

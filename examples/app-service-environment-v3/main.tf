@@ -19,6 +19,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "exampleRG1"
   location = "West Europe"
+  tags = {
+    yor_trace = "2887895a-f995-416f-a4cd-6171e561387a"
+  }
 }
 
 resource "azurerm_virtual_network" "example" {
@@ -26,6 +29,9 @@ resource "azurerm_virtual_network" "example" {
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   address_space       = ["10.0.0.0/16"]
+  tags = {
+    yor_trace = "3007d90d-2f54-43ed-845b-ec0ef352c89e"
+  }
 }
 
 resource "azurerm_subnet" "example" {
@@ -68,5 +74,6 @@ resource "azurerm_app_service_environment_v3" "example" {
   tags = {
     env         = "production"
     terraformed = "true"
+    yor_trace   = "69b95d52-c0d6-4c8a-8e29-a1d7303bd2e0"
   }
 }

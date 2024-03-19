@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "main" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "e2373beb-1a83-4e49-b439-c64bc7dd20c1"
+  }
 }
 
 resource "azurerm_virtual_network" "main" {
@@ -15,6 +18,9 @@ resource "azurerm_virtual_network" "main" {
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.main.location
   resource_group_name = azurerm_resource_group.main.name
+  tags = {
+    yor_trace = "71053713-0a48-4812-b46d-6e59a3165e54"
+  }
 }
 
 resource "azurerm_subnet" "internal" {
@@ -29,6 +35,9 @@ resource "azurerm_public_ip" "pip" {
   resource_group_name = azurerm_resource_group.main.name
   location            = azurerm_resource_group.main.location
   allocation_method   = "Dynamic"
+  tags = {
+    yor_trace = "1ba33cdf-3b3a-44c0-bc22-012806dfe1b6"
+  }
 }
 
 resource "azurerm_network_interface" "main" {
@@ -42,6 +51,9 @@ resource "azurerm_network_interface" "main" {
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.pip.id
   }
+  tags = {
+    yor_trace = "1fa0982e-d870-419d-af08-35adadbd9c3a"
+  }
 }
 
 resource "azurerm_network_interface" "internal" {
@@ -53,6 +65,9 @@ resource "azurerm_network_interface" "internal" {
     name                          = "internal"
     subnet_id                     = azurerm_subnet.internal.id
     private_ip_address_allocation = "Dynamic"
+  }
+  tags = {
+    yor_trace = "09ca86e4-bbfe-45da-a6c6-9d4d0bf08fe3"
   }
 }
 
@@ -70,6 +85,9 @@ resource "azurerm_network_security_group" "webserver" {
     source_address_prefix      = "*"
     destination_port_range     = "443"
     destination_address_prefix = azurerm_network_interface.main.private_ip_address
+  }
+  tags = {
+    yor_trace = "34e64056-c3bf-4f0a-9806-4791734c865b"
   }
 }
 
@@ -101,5 +119,8 @@ resource "azurerm_linux_virtual_machine" "main" {
   os_disk {
     storage_account_type = "Standard_LRS"
     caching              = "ReadWrite"
+  }
+  tags = {
+    yor_trace = "31080e75-4a07-452b-b208-19173fa365a4"
   }
 }

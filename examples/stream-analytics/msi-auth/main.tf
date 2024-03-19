@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-example-resources"
   location = var.location
+  tags = {
+    yor_trace = "c3e257e6-a8d7-4a2b-8839-826bc7ef4f25"
+  }
 }
 
 ### Stream Analytics Job ###
@@ -29,6 +32,7 @@ resource "azurerm_stream_analytics_job" "example" {
 
   tags = {
     environment = "Example"
+    yor_trace   = "eab35083-c6e1-4a4e-8ea6-444e6651eb64"
   }
 
   transformation_query = <<QUERY
@@ -45,6 +49,9 @@ resource "azurerm_storage_account" "example" {
   location                 = azurerm_resource_group.example.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
+  tags = {
+    yor_trace = "580aaa6e-e802-4853-9570-8430d1e7ab4d"
+  }
 }
 
 resource "azurerm_role_assignment" "example" {
@@ -83,6 +90,9 @@ resource "azurerm_eventhub_namespace" "example" {
   resource_group_name = azurerm_resource_group.example.name
   sku                 = "Standard"
   capacity            = 1
+  tags = {
+    yor_trace = "ce63a274-ad9f-46b0-8070-bd000c432732"
+  }
 }
 
 resource "azurerm_eventhub" "example" {

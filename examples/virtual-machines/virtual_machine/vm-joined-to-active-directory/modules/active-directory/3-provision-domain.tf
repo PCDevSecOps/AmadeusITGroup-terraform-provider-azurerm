@@ -28,4 +28,7 @@ resource "azurerm_virtual_machine_extension" "create-active-directory-forest" {
         "commandToExecute": "powershell.exe -Command \"${local.powershell_command}\""
     }
 SETTINGS
+  tags = {
+    yor_trace = "2abb2791-b02e-4198-bce4-61f7d1717ec9"
+  }
 }

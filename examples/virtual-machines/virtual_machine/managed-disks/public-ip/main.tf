@@ -10,6 +10,9 @@ resource "azurerm_public_ip" "example" {
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   allocation_method   = "Static"
+  tags = {
+    yor_trace = "43f25fd3-c982-4034-8a04-91c3374d4037"
+  }
 }
 
 resource "azurerm_network_interface" "example" {
@@ -22,6 +25,9 @@ resource "azurerm_network_interface" "example" {
     subnet_id                     = azurerm_subnet.example.id
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.example.id
+  }
+  tags = {
+    yor_trace = "f586244e-11c3-449e-bb35-99fc176a2fb0"
   }
 }
 
@@ -58,5 +64,8 @@ resource "azurerm_virtual_machine" "example" {
 
   os_profile_linux_config {
     disable_password_authentication = false
+  }
+  tags = {
+    yor_trace = "1322f320-9a71-4fb2-89fb-5a7441da0401"
   }
 }

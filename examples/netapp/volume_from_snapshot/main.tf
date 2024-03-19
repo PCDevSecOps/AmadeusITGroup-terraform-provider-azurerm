@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "cc405597-0e30-4aa6-9b5c-02162c224b6c"
+  }
 }
 
 resource "azurerm_virtual_network" "example" {
@@ -15,6 +18,9 @@ resource "azurerm_virtual_network" "example" {
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   address_space       = ["10.0.0.0/16"]
+  tags = {
+    yor_trace = "0ab37a6c-e090-4ac7-90e0-e86d42992d21"
+  }
 }
 
 resource "azurerm_subnet" "example" {
@@ -37,6 +43,9 @@ resource "azurerm_netapp_account" "example" {
   name                = "${var.prefix}-netappaccount"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "0fc96515-d9f1-41d8-a53d-05dc3f056262"
+  }
 }
 
 resource "azurerm_netapp_pool" "example" {
@@ -46,6 +55,9 @@ resource "azurerm_netapp_pool" "example" {
   account_name        = azurerm_netapp_account.example.name
   service_level       = "Standard"
   size_in_tb          = 4
+  tags = {
+    yor_trace = "e64fc990-6cc4-4f15-8fd2-be765c2e03de"
+  }
 }
 
 resource "azurerm_netapp_volume" "example" {
@@ -66,6 +78,9 @@ resource "azurerm_netapp_volume" "example" {
     protocols_enabled = ["NFSv3"]
     unix_read_write   = true
   }
+  tags = {
+    yor_trace = "3b5de97b-cb3f-44f1-a3f0-53cc4aefd3e5"
+  }
 }
 
 resource "azurerm_netapp_snapshot" "example" {
@@ -75,6 +90,9 @@ resource "azurerm_netapp_snapshot" "example" {
   account_name        = azurerm_netapp_account.example.name
   pool_name           = azurerm_netapp_pool.example.name
   volume_name         = azurerm_netapp_volume.example.name
+  tags = {
+    yor_trace = "b56d5dd0-5f7c-42df-836b-634deaca8fce"
+  }
 }
 
 resource "azurerm_netapp_volume" "example-snapshot" {
@@ -95,5 +113,8 @@ resource "azurerm_netapp_volume" "example-snapshot" {
     allowed_clients   = ["0.0.0.0/0"]
     protocols_enabled = ["NFSv3"]
     unix_read_write   = true
+  }
+  tags = {
+    yor_trace = "83611d46-3b2c-4ab1-b99b-92d669f00af4"
   }
 }

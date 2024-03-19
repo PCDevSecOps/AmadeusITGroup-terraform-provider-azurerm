@@ -11,6 +11,9 @@ data "azurerm_client_config" "current" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "a01d9b87-03d5-43fd-a521-81e0ea6a5f88"
+  }
 }
 
 resource "azurerm_virtual_network" "example" {
@@ -18,6 +21,9 @@ resource "azurerm_virtual_network" "example" {
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   address_space       = ["10.6.0.0/16"]
+  tags = {
+    yor_trace = "4a7a6204-2e0d-4780-849e-7d11b2c875ad"
+  }
 }
 
 resource "azurerm_subnet" "example-delegated" {
@@ -80,6 +86,9 @@ resource "azurerm_key_vault" "example" {
       "Decrypt"
     ]
   }
+  tags = {
+    yor_trace = "54d4c77d-d254-4a68-92fc-ebc7143a063d"
+  }
 }
 
 resource "azurerm_key_vault_key" "example" {
@@ -96,6 +105,9 @@ resource "azurerm_key_vault_key" "example" {
     "verify",
     "wrapKey",
   ]
+  tags = {
+    yor_trace = "7d034036-e06e-4bd9-aeca-618571224ece"
+  }
 }
 
 resource "azurerm_private_endpoint" "example" {
@@ -110,12 +122,18 @@ resource "azurerm_private_endpoint" "example" {
     is_manual_connection           = false
     subresource_names              = ["Vault"]
   }
+  tags = {
+    yor_trace = "e076b83f-fa58-4b6c-8f65-fff9e1decc8c"
+  }
 }
 
 resource "azurerm_user_assigned_identity" "example" {
   name                = "${var.prefix}-user-assigned-identity"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
+  tags = {
+    yor_trace = "d0a62e68-6e1b-4d40-b8ff-d19cc33beb8c"
+  }
 }
 
 resource "azurerm_netapp_account" "example" {
@@ -128,6 +146,9 @@ resource "azurerm_netapp_account" "example" {
     identity_ids = [
       azurerm_user_assigned_identity.example.id
     ]
+  }
+  tags = {
+    yor_trace = "a854d398-d7b5-46d0-87ff-16765b299ddc"
   }
 }
 
@@ -150,6 +171,9 @@ resource "azurerm_netapp_pool" "example" {
   depends_on = [
     azurerm_netapp_account_encryption.example
   ]
+  tags = {
+    yor_trace = "faf46c6a-8f2a-4bcb-aa3f-7f42d6cb2816"
+  }
 }
 
 resource "azurerm_netapp_volume" "example" {
@@ -179,4 +203,7 @@ resource "azurerm_netapp_volume" "example" {
     azurerm_netapp_account_encryption.example,
     azurerm_private_endpoint.example
   ]
+  tags = {
+    yor_trace = "ea10e6ab-72d6-4c56-b37a-df457eafaaf9"
+  }
 }

@@ -8,6 +8,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "62d8cc1c-28fb-4ae1-a9a8-09c6c57e5685"
+  }
 }
 
 resource "azurerm_cosmosdb_account" "example" {
@@ -37,5 +40,8 @@ resource "azurerm_cosmosdb_account" "example" {
   geo_location {
     location          = var.alt_location
     failover_priority = 0
+  }
+  tags = {
+    yor_trace = "6f36b3cd-edbc-4e52-bbf0-f653b1f94a6b"
   }
 }

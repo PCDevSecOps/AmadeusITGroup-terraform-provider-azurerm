@@ -6,6 +6,9 @@ resource "azurerm_public_ip" "static" {
   location            = var.location
   resource_group_name = var.resource_group_name
   allocation_method   = "Static"
+  tags = {
+    yor_trace = "803fabf9-55f1-446e-9804-cefa100e94b9"
+  }
 }
 
 resource "azurerm_network_interface" "primary" {
@@ -17,6 +20,9 @@ resource "azurerm_network_interface" "primary" {
     subnet_id                     = var.subnet_id
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.static.id
+  }
+  tags = {
+    yor_trace = "ad225326-bfb8-41f9-895c-db25a1b29317"
   }
 }
 
@@ -45,6 +51,9 @@ resource "azurerm_windows_virtual_machine" "domain-member" {
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
   }
+  tags = {
+    yor_trace = "48d5a41c-6c1e-44b6-8612-f040da6b0859"
+  }
 }
 
 // Waits for up to 1 hour for the Domain to become available. Will return an error 1 if unsuccessful preventing the member attempting to join.
@@ -61,6 +70,9 @@ resource "azurerm_virtual_machine_extension" "wait-for-domain-to-provision" {
     "commandToExecute": "powershell.exe -Command \"while (!(Test-Connection -ComputerName ${var.active_directory_domain_name} -Count 1 -Quiet) -and ($retryCount++ -le 360)) { Start-Sleep 10 } \""
   }
 SETTINGS
+  tags = {
+    yor_trace = "a9c495c1-9e5c-4f3d-a699-f64a5390802a"
+  }
 }
 
 resource "azurerm_virtual_machine_extension" "join-domain" {
@@ -87,4 +99,7 @@ SETTINGS
 SETTINGS
 
   depends_on = [azurerm_virtual_machine_extension.wait-for-domain-to-provision]
+  tags = {
+    yor_trace = "17356ef8-116a-49b3-90d6-12ce808fae04"
+  }
 }

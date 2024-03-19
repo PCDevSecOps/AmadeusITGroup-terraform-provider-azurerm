@@ -11,6 +11,9 @@ resource "azurerm_network_interface" "dc_nic" {
     private_ip_address            = "10.0.1.4"
     subnet_id                     = var.subnet_id
   }
+  tags = {
+    yor_trace = "392b4234-0dfa-43b7-9fbd-ef2806544523"
+  }
 }
 
 resource "azurerm_windows_virtual_machine" "domain-controller" {
@@ -47,6 +50,9 @@ resource "azurerm_windows_virtual_machine" "domain-controller" {
     content = local.first_logon_data
     setting = "FirstLogonCommands"
   }
+  tags = {
+    yor_trace = "bc2b12d2-c526-47a1-977b-133bd3ea8747"
+  }
 }
 
 resource "azurerm_virtual_machine_extension" "create-ad-forest" {
@@ -60,4 +66,7 @@ resource "azurerm_virtual_machine_extension" "create-ad-forest" {
     "commandToExecute": "powershell.exe -Command \"${local.powershell_command}\""
   }
 SETTINGS
+  tags = {
+    yor_trace = "6245571b-e987-456b-95b7-1551e8be704b"
+  }
 }

@@ -14,6 +14,9 @@ module "naming" {
 resource "azurerm_resource_group" "example" {
   name     = module.naming.resource_group.name
   location = var.location
+  tags = {
+    yor_trace = "c90fb8d0-38ed-4312-94b4-3f47494f4b65"
+  }
 }
 
 resource "azurerm_iothub_dps_certificate" "example" {

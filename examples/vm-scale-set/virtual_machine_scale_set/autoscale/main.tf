@@ -12,6 +12,9 @@ locals {
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = var.location
+  tags = {
+    yor_trace = "02cce8f1-34a3-4567-9590-1a2e0a2f055d"
+  }
 }
 
 resource "azurerm_virtual_network" "example" {
@@ -19,6 +22,9 @@ resource "azurerm_virtual_network" "example" {
   resource_group_name = azurerm_resource_group.example.name
   location            = azurerm_resource_group.example.location
   address_space       = ["10.0.0.0/16"]
+  tags = {
+    yor_trace = "9d9c5b53-0601-4328-a664-3c3eebff1321"
+  }
 }
 
 resource "azurerm_subnet" "example" {
@@ -73,6 +79,9 @@ resource "azurerm_virtual_machine_scale_set" "example" {
     offer     = "0001-com-ubuntu-server-jammy"
     sku       = "22_04-lts"
     version   = "latest"
+  }
+  tags = {
+    yor_trace = "c957a848-6e4f-4920-9bec-e0e4d55ea3f1"
   }
 }
 
@@ -130,5 +139,8 @@ resource "azurerm_monitor_autoscale_setting" "example" {
         cooldown  = "PT1M"
       }
     }
+  }
+  tags = {
+    yor_trace = "551826d9-cab1-4440-a2b8-d1db4a281ab8"
   }
 }
